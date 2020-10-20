@@ -1,0 +1,3 @@
+"D:\Program Files\JetBrains\Toolbox\apps\CLion\ch-0\202.7319.72\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\IoT_GUIAPI.dir/objects.a
+"D:\Program Files (x86)\mingw-w64\i686-7.3.0-posix-sjlj-rt_v5-rev0\mingw32\bin\ar.exe" cr CMakeFiles\IoT_GUIAPI.dir/objects.a @CMakeFiles\IoT_GUIAPI.dir\objects1.rsp
+"D:\Program Files (x86)\mingw-w64\i686-7.3.0-posix-sjlj-rt_v5-rev0\mingw32\bin\g++.exe" -g   -Wl,--whole-archive CMakeFiles\IoT_GUIAPI.dir/objects.a -Wl,--no-whole-archive  -o IoT_GUIAPI.exe -Wl,--out-implib,libIoT_GUIAPI.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\IoT_GUIAPI.dir\linklibs.rsp

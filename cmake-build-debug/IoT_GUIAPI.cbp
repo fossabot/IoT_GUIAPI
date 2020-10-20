@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="IoT_GUIAPI"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="IoT_GUIAPI">
+				<Option output="E:/GitHub/IoT_GUIAPI/cmake-build-debug/IoT_GUIAPI.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+					<Add directory="E:/GitHub/IoT_GUIAPI"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 IoT_GUIAPI"/>
+					<CompileFile command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="IoT_GUIAPI/fast">
+				<Option output="E:/GitHub/IoT_GUIAPI/cmake-build-debug/IoT_GUIAPI.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+					<Add directory="E:/GitHub/IoT_GUIAPI"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 IoT_GUIAPI/fast"/>
+					<CompileFile command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LIST_LIB">
+				<Option output="E:/GitHub/IoT_GUIAPI/cmake-build-debug/libLIST_LIB.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+					<Add directory="E:/GitHub/IoT_GUIAPI"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 LIST_LIB"/>
+					<CompileFile command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LIST_LIB/fast">
+				<Option output="E:/GitHub/IoT_GUIAPI/cmake-build-debug/libLIST_LIB.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+					<Add directory="E:/GitHub/IoT_GUIAPI"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.3.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 LIST_LIB/fast"/>
+					<CompileFile command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="E:/GitHub/IoT_GUIAPI/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/mingw-w64/i686-7.3.0-posix-sjlj-rt_v5-rev0/mingw32/bin/mingw32-make.exe -f &quot;E:/GitHub/IoT_GUIAPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="E:/GitHub/IoT_GUIAPI/libs/List.cpp">
+			<Option target="LIST_LIB"/>
+		</Unit>
+		<Unit filename="E:/GitHub/IoT_GUIAPI/libs/List.h">
+			<Option target="LIST_LIB"/>
+		</Unit>
+		<Unit filename="E:/GitHub/IoT_GUIAPI/main.cpp">
+			<Option target="IoT_GUIAPI"/>
+		</Unit>
+		<Unit filename="E:/GitHub/IoT_GUIAPI/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

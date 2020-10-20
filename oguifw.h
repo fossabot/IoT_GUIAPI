@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <libs/List.h>
 
+
+//Тут всё лучше сначала начать
 class LayoutItem{
 public:
     void setDrawPixel(void (*drawPixel)(uint16_t, uint16_t, uint16_t)){

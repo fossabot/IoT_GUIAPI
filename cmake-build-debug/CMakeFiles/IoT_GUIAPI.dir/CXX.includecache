@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../libs/List.h
+
+E:/GitHub/IoT_GUIAPI/main.cpp
+stdlib.h
+-
+stdint.h
+-
+oguifw.h
+E:/GitHub/IoT_GUIAPI/oguifw.h
+
+E:/GitHub/IoT_GUIAPI/oguifw.h
+stdint.h
+-
+libs/List.h
+-
+
