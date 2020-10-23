@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 /**************************************************************************************/
 typedef struct{
@@ -22,7 +23,7 @@ typedef struct{
     GUIAPI_UT_SIZE szDisplaySize;
 } GUIAPI_MAIN;
 
-enum {
+typedef enum {
     E_LAYOUT_ITEM_TEXTBOX,
     E_LAYOUT_ITEM_PUSHBUTTON,
     E_LAYOUT_ITEM_PROGRESSBAR
@@ -66,7 +67,6 @@ typedef struct {
     GUIAPI_UT_POSITION pLayoutPosition;
     GUIAPI_UT_SIZE     szLayoutSize;       //0, 0 - full screen
 
-    uint32_t
     bool bEnabled;
     void* fnClickEvent;
     /*Style...*/
