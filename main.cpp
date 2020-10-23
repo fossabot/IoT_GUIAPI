@@ -1,28 +1,79 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#include "oguifw.h"
+/**************************************************************************************/
+typedef struct{
+    uint32_t x;
+    uint32_t y;
+} GUIAPI_UT_POSITION;
 
-void drawPixel(uint16_t x, uint16_t y, uint16_t color){
-  return;
-}
+/**************************************************************************************/
+typedef struct{
+    uint32_t width;
+    uint32_t height;
+} GUIAPI_UT_SIZE;
 
-void display(){
-  return;
-}
+/**************************************************************************************/
+typedef struct{
+    void* fnDrawPixel;
+    void* fnClearScreen;
+    void* fnDisplay;
 
-void clear(){
-  return;
-}
+    GUIAPI_UT_SIZE szDisplaySize;
+} GUIAPI_MAIN;
 
-GUI gui = GUI(drawPixel, display, clear);
+enum {
+    E_LAYOUT_ITEM_TEXTBOX,
+    E_LAYOUT_ITEM_PUSHBUTTON,
+    E_LAYOUT_ITEM_PROGRESSBAR
+}E_GUIAPI_LAYOUT_ITEM_CLASS;
+
+typedef struct{
+    E_GUIAPI_LAYOUT_ITEM_CLASS eItemClass;
+}GUIAPI_LAYOUT_ITEM;
+
+/**************************************************************************************/
+typedef struct {
+    GUIAPI_UT_POSITION pLayoutPosition;
+    GUIAPI_UT_SIZE     szLayoutSize;       //0, 0 - full screen
+
+    bool bEnabled;
+    GUIAPI_LAYOUT_ITEM aLayoutItems;
+} GUIAPI_UI_LAYOUT_BOX;
+
+/**************************************************************************************/
+typedef struct {
+    GUIAPI_UT_POSITION pLayoutPosition;
+    GUIAPI_UT_SIZE     szLayoutSize;       //0, 0 - full screen
+
+    char cText[128];
+    bool bEnabled;
+    void* fnChangeEvent;
+    /*Style...*/
+} GUIAPI_UI_TEXTBOX;
+
+typedef struct {
+    GUIAPI_UT_POSITION pLayoutPosition;
+    GUIAPI_UT_SIZE     szLayoutSize;       //0, 0 - full screen
+
+    char cText[64];
+    bool bEnabled;
+    void* fnClickEvent;
+    /*Style...*/
+} GUIAPI_UI_PUSH_BUTTON;
+
+typedef struct {
+    GUIAPI_UT_POSITION pLayoutPosition;
+    GUIAPI_UT_SIZE     szLayoutSize;       //0, 0 - full screen
+
+    uint32_t
+    bool bEnabled;
+    void* fnClickEvent;
+    /*Style...*/
+} GUIAPI_UI_PROGRESSBAR;
+
 
 int main(){
-  Layout testLayout;
-
-  gui.add(testLayout);
-  
-  gui.draw();
 
   while (1){
   

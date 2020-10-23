@@ -1,14 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
+project(IoT_GUIAPI C)
 
-project(IoT_GUIAPI LANGUAGES CXX)
+set(CMAKE_C_STANDARD 99)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-add_library(LIST_LIB libs/List.cpp libs/List.h)
-
-add_executable(IoT_GUIAPI main.cpp)
-
-target_link_libraries(IoT_GUIAPI LIST_LIB)
+add_executable(IoT_GUIAPI main.c)
