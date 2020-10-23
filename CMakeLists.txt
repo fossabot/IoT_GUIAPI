@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
-project(IoT_GUIAPI C)
+project(IoT_GUIAPI CXX)
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_CXX_STANDARD 11)
 
-add_executable(IoT_GUIAPI main.c)
+add_executable(IoT_GUIAPI main.cpp)
