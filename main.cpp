@@ -59,7 +59,7 @@ public:
 /**************************************************************************************/
 //This class is a container for layout items. 
 /**************************************************************************************/
-class GUIAPI_Layout : private GUIAPI_LayoutItem{
+class GUIAPI_Layout : private GUIAPI_Widget{
 public:
     GUIAPI_Layout(/* args */);
     ~GUIAPI_Layout();
@@ -69,6 +69,24 @@ public:
 private:
     GUIAPI_LayoutItem* lItems;
 
+};
+
+/**************************************************************************************/
+//This class is for drawing effects. 
+/**************************************************************************************/
+class GUIAPI_GFX{
+private:
+    static GUIAPI_GFX * p_instance;
+    // Конструкторы и оператор присваивания недоступны клиентам
+    GUIAPI_GFX() {}
+    GUIAPI_GFX(const GUIAPI_GFX&);  
+    GUIAPI_GFX& operator=(GUIAPI_GFX&);
+public:
+    static GUIAPI_GFX *getInstance() {
+        if(!p_instance)           
+            p_instance = new GUIAPI_GFX();
+        return p_instance;
+    }
 };
 
 /**************************************************************************************/
@@ -89,6 +107,8 @@ public:
     void setClearScreenFn(void* fnClearScreen);
     void setDisplayFn(void* fnDisplay);
 
+    void display();     /*lLayout[selectedLayout].draw(); fnDisplay;*/
+
     GUIAPI_Layout getLayout(uint32_t iLayoutIndex);
     uint32_t getScreenWidth();
     uint32_t getScreenHeight();
@@ -102,6 +122,8 @@ private:
     void* fnDisplay;
 
     GUIAPI_Layout* lLayouts;
+
+    uint32_t selectedLayout;
 };
 
 int main(){
