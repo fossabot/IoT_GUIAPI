@@ -31,7 +31,6 @@ public:
         if(index > 0 && index < stringLength){
             return stringData[index];
         }
-        return '\000';
     }
 
 private:

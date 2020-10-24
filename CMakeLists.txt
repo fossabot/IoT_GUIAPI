@@ -3,6 +3,7 @@ project(IoT_GUIAPI CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
+include_directories(datatypes/)
 add_subdirectory(datatypes/)
 
 file(GLOB C_FILES *.c)
