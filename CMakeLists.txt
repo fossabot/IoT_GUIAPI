@@ -3,4 +3,8 @@ project(IoT_GUIAPI CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(IoT_GUIAPI main.cpp)
+find(GLOB C_FILES *.c)
+SET_SOURCE_FILES_PROPERTIES(C_FILES PROPERTIES LANGUAGE CXX)
+
+find(GLOB CPP_FILES *.cpp)
+add_executable(IoT_GUIAPI CPP_FILES)
