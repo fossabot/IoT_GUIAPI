@@ -39,6 +39,7 @@ void GUIAPI_Array<T>::append(T item){
     }
 }
 
+/*****************************************************************************************/
 template<class T>
 void GUIAPI_Array<T>::move(T* from, T* to, uint32_t mSize){
     for(uint32_t i = 0; i < mSize; i++)
