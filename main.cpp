@@ -2,20 +2,41 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "GUIAPI_String.h"
+#include "GUIAPI_Array.h"
+
 /**************************************************************************************/
 //This is the main class for all classes, except for one
 /**************************************************************************************/
 class GUIAPI_Widget{
 public:
-    GUIAPI_Widget();
-    ~GUIAPI_Widget();
+    GUIAPI_Widget() {}
+    ~GUIAPI_Widget() {}
     
 private:
-    void draw();
     uint32_t xPos;
     uint32_t yPos;
     uint32_t width;
     uint32_t height;
+
+    bool isEnabled;
+    bool isVisible;
+    /*style*/
+private:
+    void draw() {}
+
+    inline void setXPos(uint32_t xPos) { this->xPos = xPos; }
+    inline void setYPos(uint32_t yPos) { this->yPos = yPos; }
+    inline void setWidth(uint32_t width) { this->width = width; }
+    inline void setHeight(uint32_t height) { this->height = height; }
+
+    inline void setEnabled(bool newState) { isEnabled = newState; }
+    inline void setVisible(bool newState) { isVisible = newState; }
+
+    inline uint32_t getXPos() { return xPos; }
+    inline uint32_t getYPos() { return yPos; }
+    inline uint32_t getWidth() { return width; }
+    inline uint32_t getHeight() { return height; }
 };
 
 /**************************************************************************************/
@@ -23,35 +44,66 @@ private:
 /**************************************************************************************/
 class GUIAPI_LayoutItem : private GUIAPI_Widget{
 private:
-    /* data */
+    bool isReadOnly;
+    GUIAPI_String tText;
+
+    void setText(GUIAPI_String newText) { tText = newText; }
+    void setText(const char* newText) { tText = GUIAPI_String(newText); }
+    GUIAPI_String getText() { return tText; }
 public:
-    GUIAPI_LayoutItem(/* args */);
-    ~GUIAPI_LayoutItem();
+    GUIAPI_LayoutItem(/* args */) {}
+    ~GUIAPI_LayoutItem() {}
 };
 
 /*------------------------------------------------------------------------------------*/
 //Layout items
 
 /**************************************************************************************/
-//This class of realisation of TextBox.
+//This class with realisation of Label.
+/**************************************************************************************/
+class GUIAPI_IT_Label : private GUIAPI_LayoutItem{
+private:
+    void draw() {}
+public:
+    GUIAPI_IT_Label();
+    GUIAPI_IT_Label(GUIAPI_String labelText);
+    ~GUIAPI_IT_Label();
+};
+
+/**************************************************************************************/
+//This class with realisation of TextBox.
 /**************************************************************************************/
 class GUIAPI_IT_TextBox : private GUIAPI_LayoutItem{
 private:
-    /* data */
+    void draw() {}
 public:
-    GUIAPI_IT_TextBox(/* args */);
+    GUIAPI_IT_TextBox();
+    GUIAPI_IT_TextBox(GUIAPI_String textboxText);
     ~GUIAPI_IT_TextBox();
 };
 
 /**************************************************************************************/
-//This class of realisation of PushButton.
+//This class with realisation of PushButton.
 /**************************************************************************************/
 class GUIAPI_IT_PushButton : private GUIAPI_LayoutItem{
 private:
-    /* data */
+    void draw() {}
 public:
     GUIAPI_IT_PushButton(/* args */);
+    GUIAPI_IT_PushButton(GUIAPI_String buttonText);
     ~GUIAPI_IT_PushButton();
+};
+
+/**************************************************************************************/
+//This class with realisation of RadioButton.
+/**************************************************************************************/
+class GUIAPI_IT_RadioButton : private GUIAPI_LayoutItem{
+private:
+    void draw() {}
+public:
+    GUIAPI_IT_RadioButton(/* args */);
+    GUIAPI_IT_RadioButton(GUIAPI_String buttonText);
+    ~GUIAPI_IT_RadioButton();
 };
 /*------------------------------------------------------------------------------------*/
 
@@ -64,11 +116,24 @@ public:
     GUIAPI_Layout(/* args */);
     ~GUIAPI_Layout();
 
-    void addWidget(GUIAPI_LayoutItem lItem);
+    void addWidget(GUIAPI_LayoutItem lItem) { lItems.append(lItem); iItems++; }
     
 private:
-    GUIAPI_LayoutItem* lItems;
+    void draw() {}
+    GUIAPI_Array<GUIAPI_LayoutItem> lItems;
+    uint32_t iItems;
 
+};
+
+/**************************************************************************************/
+//This class is for drawing effects. 
+/**************************************************************************************/
+class GUIAPI_INPUT_MANAGER{
+public:
+    GUIAPI_INPUT_MANAGER();
+    ~GUIAPI_INPUT_MANAGER();
+
+    void connect(GUIAPI_LayoutItem* lItem, void* lItemParam, void* eItem, void* eItemParam);
 };
 
 /**************************************************************************************/
@@ -81,12 +146,17 @@ private:
     GUIAPI_GFX() {}
     GUIAPI_GFX(const GUIAPI_GFX&);  
     GUIAPI_GFX& operator=(GUIAPI_GFX&);
+
+    void* fnDrawPixel;
+
 public:
     static GUIAPI_GFX *getInstance() {
         if(!p_instance)           
             p_instance = new GUIAPI_GFX();
         return p_instance;
     }
+
+    void setDrawPixel(void* fnDrawPixel) { this->fnDrawPixel = fnDrawPixel; }
 };
 
 /**************************************************************************************/
