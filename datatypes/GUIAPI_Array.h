@@ -2,6 +2,7 @@
 #define __GUIAPI_ARRAY__
 
 #include "stdint.h"
+#include "stdlib.h"
 
 template<class T>
 class GUIAPI_Array{
