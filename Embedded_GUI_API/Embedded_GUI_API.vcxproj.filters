@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\EmbedGUIAPI">
+      <UniqueIdentifier>{19c55f39-0197-42dd-ac87-d69efdc809b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EmbedGUIAPI\Layout">
+      <UniqueIdentifier>{111a2074-964e-4bb0-92c6-006ed748682f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EmbedGUIAPI\Layout\Widget">
+      <UniqueIdentifier>{dc1df9cd-c9df-4387-87de-34d98576dcac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EmbedGUIAPI\Common">
+      <UniqueIdentifier>{7ddc762e-21e3-4e0f-b9d9-6a77b8624814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EmbedGUIAPI\Common\List">
+      <UniqueIdentifier>{68336529-9da4-4be8-954c-88522dc11de2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Embedded_GUI_API.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EmbedGUIAPI.c">
+      <Filter>Source Files\EmbedGUIAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget.c">
+      <Filter>Source Files\EmbedGUIAPI\Layout\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout.c">
+      <Filter>Source Files\EmbedGUIAPI\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetsList.c">
+      <Filter>Source Files\EmbedGUIAPI\Common\List</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EmbedGUIAPI.h">
+      <Filter>Source Files\EmbedGUIAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget.h">
+      <Filter>Source Files\EmbedGUIAPI\Layout\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout.h">
+      <Filter>Source Files\EmbedGUIAPI\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Source Files\EmbedGUIAPI\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetsList.h">
+      <Filter>Source Files\EmbedGUIAPI\Common\List</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
