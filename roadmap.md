@@ -1,0 +1,1 @@
+-Add make libs for string and array realisation (GUIAPI_String, GUIAPI_Array)

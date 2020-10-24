@@ -3,4 +3,13 @@ project(IoT_GUIAPI CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(IoT_GUIAPI main.cpp)
+include_directories(datatypes/)
+add_subdirectory(datatypes/)
+
+file(GLOB C_FILES *.c)
+SET_SOURCE_FILES_PROPERTIES(${C_FILES} PROPERTIES LANGUAGE CXX)
+
+file(GLOB CPP_FILES *.cpp *.c)
+add_executable(IoT_GUIAPI ${CPP_FILES})
+
+target_link_libraries(IoT_GUIAPI GUIAPI_TYPES)
