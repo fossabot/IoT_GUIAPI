@@ -26,9 +26,21 @@ void GUIAPI_Array<T>::append(T item){
     if(arraySize < arraySizeMax){
         items[arraySize++] = item;
     }else{
-        GUIAPI_Array<T> backup = *this;
-        *this = backup;
+        T *backup = (T*)calloc(arraySize, sizeof(T));
+        move(items, backup, arraySize);
+        free(items);
+
+        arraySizeMax += 3;
+        items = (T*)calloc(arraySizeMax, sizeof(T));
+        move(backup, items, arraySize);
         items[arraySize++] = item;
         this->arraySize++;
+        free(backup);
     }
+}
+
+template<class T>
+void GUIAPI_Array<T>::move(T* from, T* to, uint32_t mSize){
+    for(uint32_t i = 0; i < mSize; i++)
+        to[i] = from[i];
 }

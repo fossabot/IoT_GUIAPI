@@ -17,12 +17,12 @@ public:
     GUIAPI_Array& operator=(const GUIAPI_Array& nArray){
         if(nArray.arraySize > this->arraySize){
             free(items);
-            this->arraySizeMax = nArray.arraySize + 3;
-            this->arraySize = nArray.arraySize;
+            this->arraySizeMax = nArray.arraySizeMax;
             items = (T*)calloc(this->arraySizeMax, sizeof(T));
         }
-        for(uint32_t i = 0; i < nArray.arraySize; i++)
-            this->items[i] = nArray[i];
+
+        this->arraySize = nArray.arraySize;
+        move(nArray.items, this->items, nArray.arraySize);
         return *this;
     }
 
@@ -34,6 +34,7 @@ public:
     }
 
 private:
+    void move(T* from, T* to, uint32_t mSize);
     uint32_t arraySize;
     uint32_t arraySizeMax;
 

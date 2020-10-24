@@ -3,6 +3,7 @@
 
 #include "string.h"
 #include "stdint.h"
+#include "stdlib.h"
 
 class GUIAPI_String{
 public:
@@ -18,7 +19,12 @@ public:
     uint32_t length() { return stringLength; }
 
     GUIAPI_String& operator=(const GUIAPI_String& nString){
-        memcpy(this->stringData, nString.stringData, nString.stringLength);
+        char backup[256] = {0};
+        memcpy(backup, this->stringData, this->stringLength);
+        this->stringLength = nString.stringLength;
+        free(stringData);
+        stringData = (char*)calloc(this->stringLength, sizeof(char));
+        memcpy(this->stringData, backup, this->stringLength);
         return *this;
     }
 

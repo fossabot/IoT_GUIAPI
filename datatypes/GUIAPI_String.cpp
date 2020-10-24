@@ -1,7 +1,5 @@
 #include "GUIAPI_String.h"
 
-#include "stdlib.h"
-
 /*****************************************************************************************/
 GUIAPI_String::GUIAPI_String(){
     stringLength = 64;
@@ -36,7 +34,7 @@ GUIAPI_String::~GUIAPI_String(){
 
 /*****************************************************************************************/
 void GUIAPI_String::setLength(uint32_t newLength){
-    char backup[256];
+    char backup[256] = {0};
     uint32_t oldLength = stringLength;
     memcpy(backup, stringData, stringLength);
 
