@@ -8,7 +8,6 @@
 class GUIAPI_String{
 public:
     GUIAPI_String();
-    GUIAPI_String(uint32_t stringLength);
     GUIAPI_String(const char* newString);
     GUIAPI_String(const char* newString, uint32_t stringLength);
     ~GUIAPI_String();
@@ -19,18 +18,27 @@ public:
     uint32_t length() { return stringLength; }
 
     GUIAPI_String& operator=(const GUIAPI_String& nString){
-        char backup[256] = {0};
-        memcpy(backup, this->stringData, this->stringLength);
+        free(this->stringData);
+        this->stringData = (char*)calloc(nString.stringLength, sizeof(char));
+        memcpy(this->stringData, nString.stringData, nString.stringLength);
         this->stringLength = nString.stringLength;
-        free(stringData);
-        stringData = (char*)calloc(this->stringLength, sizeof(char));
-        memcpy(this->stringData, backup, this->stringLength);
         return *this;
     }
 
     GUIAPI_String& operator=(const char* constCharData){
+        this->stringLength = strlen(constCharData);
+        free(stringData);
+        stringData = (char*)calloc(stringLength, sizeof(char));
         memcpy(this->stringData, constCharData, this->stringLength);
         return *this;
+    }
+
+    bool operator==(const GUIAPI_String& nString){
+        return strcmp(this->stringData, nString.stringData) == 0;
+    }
+
+    bool operator!=(const GUIAPI_String& nString){
+        return strcmp(this->stringData, nString.stringData) != 0;
     }
 
     char& operator[](int index){

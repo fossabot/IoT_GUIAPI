@@ -2,28 +2,22 @@
 
 /*****************************************************************************************/
 GUIAPI_String::GUIAPI_String(){
-    stringLength = 64;
-    stringData = (char*)calloc(stringLength, sizeof(char));
-}
-
-/*****************************************************************************************/
-GUIAPI_String::GUIAPI_String(uint32_t stringLength){
-    this->stringLength = stringLength;
+    stringLength = 10;
     stringData = (char*)calloc(stringLength, sizeof(char));
 }
 
 /*****************************************************************************************/
 GUIAPI_String::GUIAPI_String(const char* newString){
-    stringLength = 64;
-    stringData = (char*)calloc(stringLength, sizeof(char));
-    if(stringData != nullptr) memcpy(stringData, newString, stringLength);
+    this->stringLength = strlen(newString);
+    this->stringData = (char*)calloc(this->stringLength, sizeof(char));
+    if(this->stringData != nullptr) memcpy(this->stringData, newString, this->stringLength);
 }
 
 /*****************************************************************************************/
 GUIAPI_String::GUIAPI_String(const char* newString, uint32_t stringLength){
-    stringLength = stringLength;
-    stringData = (char*)calloc(stringLength, sizeof(char));
-    if(stringData != nullptr) memcpy(stringData, newString, stringLength);
+    this->stringLength = stringLength;
+    this->stringData = (char*)calloc(this->stringLength, sizeof(char));
+    if(this->stringData != nullptr) memcpy(this->stringData, newString, this->stringLength);
 }
 
 /*****************************************************************************************/
