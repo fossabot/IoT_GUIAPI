@@ -12,7 +12,7 @@ int main(){
     //New string object from char array and array size
     GUIAPI_String secondTest("Hello world!", 12);
     if(firstTest != secondTest){
-        printf("Same string is not compatable: %s/%s\r\n", firstTest.toC_str(), secondTest.toC_str());
+        printf("Same string is not compatable: %s/%s\r\n", firstTest.c_str(), secondTest.c_str());
         return -2;
     }
 

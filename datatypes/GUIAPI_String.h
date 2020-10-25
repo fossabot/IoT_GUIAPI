@@ -12,9 +12,11 @@ public:
     GUIAPI_String(const char* newString, uint32_t stringLength);
     ~GUIAPI_String();
 
-    const char* toC_str() { return stringData; }
+    const char* c_str() { return stringData; }
+    void assign(char chr);
+    void empty();
+    void clear();
 
-    void setLength(uint32_t newLength);
     uint32_t length() { return stringLength; }
 
     GUIAPI_String& operator=(const GUIAPI_String& nString){
@@ -33,6 +35,11 @@ public:
         return *this;
     }
 
+    GUIAPI_String& operator+=(const char chr){
+        assign(chr);
+        return *this;
+    }
+
     bool operator==(const GUIAPI_String& nString){
         return strcmp(this->stringData, nString.stringData) == 0;
     }
@@ -41,7 +48,7 @@ public:
         return strcmp(this->stringData, nString.stringData) != 0;
     }
 
-    char& operator[](int index){
+    char& operator[](uint32_t index){
         if(index > 0 && index < stringLength){
             return stringData[index];
         }

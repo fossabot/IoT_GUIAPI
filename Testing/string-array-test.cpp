@@ -23,7 +23,7 @@ int main(){
         sprintf(buffer, "%luHello world!", i);
         stringArray.append(GUIAPI_String(reinterpret_cast<const char*>(buffer), (uint32_t)strlen(buffer)));
     }
-    for(uint32_t i = 0; i < stringArray.length(); i++) printf("%s ", stringArray[i].toC_str());
+    for(uint32_t i = 0; i < stringArray.length(); i++) printf("%s ", stringArray[i].c_str());
     printf("\r\n");
     if(stringArray.length() != stringArray.capacity()){
         printf("Multiple objects appending test failed.");

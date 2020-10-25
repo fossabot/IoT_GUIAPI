@@ -27,14 +27,28 @@ GUIAPI_String::~GUIAPI_String(){
 }
 
 /*****************************************************************************************/
-void GUIAPI_String::setLength(uint32_t newLength){
-    char backup[256] = {0};
-    uint32_t oldLength = stringLength;
+void GUIAPI_String::assign(char chr){
+    char *backup = (char*)calloc(stringLength, sizeof(char));
     memcpy(backup, stringData, stringLength);
 
     free(stringData);
-    stringLength = newLength;
+    stringLength = stringLength + 1;
     stringData = (char*)calloc(stringLength, sizeof(char));
+    if(stringData != nullptr) memcpy(stringData, backup, stringLength-1);
+    stringData[stringLength-1] = chr;
+    free(backup);
+}
 
-    if(stringData != nullptr) memcpy(stringData, backup, oldLength);
+/*****************************************************************************************/
+void GUIAPI_String::empty(){
+    free(stringData);
+    stringData = 0;
+    stringLength = 0;
+}
+
+/*****************************************************************************************/
+void GUIAPI_String::clear(){
+    free(stringData);
+    stringData = 0;
+    stringData = (char*)calloc(stringLength, sizeof(char));
 }

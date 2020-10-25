@@ -20,6 +20,7 @@ public:
         this->arrayLength = 0;
         items = (T*)calloc(arrayCapacity, sizeof(T));
     }
+
     /*****************************************************************************************/
     ~GUIAPI_Array(){
         free(items);
@@ -42,6 +43,33 @@ public:
         }
     }
 
+    /*****************************************************************************************/
+    T& front(){
+        return items[0];
+    }
+
+    /*****************************************************************************************/
+    T& back(){
+        return items[arrayLength-1];
+    }
+
+    /*****************************************************************************************/
+    void empty(){
+        free(items);
+        this->arrayLength = 0;
+        items = (T*)calloc(this->arrayCapacity, sizeof(T));
+    }
+
+    /*****************************************************************************************/
+    void fill(T item){
+        for(uint32_t i = 0; i < arrayCapacity; i++)
+            append(item);
+    }
+
+    T* data(){ return items; }
+
+    bool isEmpty() { return arrayLength == 0; }
+
     /*Returning number of elements*/
     uint32_t length() { return arrayLength; }
     /*Returning number of cells in array*/
@@ -49,11 +77,19 @@ public:
 
     /*****************************************************************************************/
     GUIAPI_Array& operator=(const GUIAPI_Array& nArray){
-        free(items);
+        empty();
         this->arrayCapacity = nArray.arrayCapacity;
         this->arrayLength = nArray.arrayLength;
         items = (T*)calloc(this->arrayCapacity, sizeof(T));
         move(nArray.items, this->items, nArray.arrayLength);
+        return *this;
+    }
+
+    /*****************************************************************************************/
+    GUIAPI_Array& operator=(const T& items){
+        empty();
+        for(T item : items)
+            append(item);
         return *this;
     }
 
