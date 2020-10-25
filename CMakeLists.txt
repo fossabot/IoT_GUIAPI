@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 include_directories(datatypes/)
 add_subdirectory(datatypes/)
 
-add_subdirectory(tests/)
+add_subdirectory(Testing/)
 
 file(GLOB C_FILES *.c)
 SET_SOURCE_FILES_PROPERTIES(${C_FILES} PROPERTIES LANGUAGE CXX)
