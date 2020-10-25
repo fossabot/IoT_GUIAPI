@@ -9,3 +9,9 @@ set(STRING_TEST_NAME string-test)
 add_executable(${STRING_TEST_NAME} ${STRING_TEST_NAME}.cpp)
 target_link_libraries(${STRING_TEST_NAME} GUIAPI_TYPES)
 add_test(${STRING_TEST_NAME} ${STRING_TEST_NAME})
+
+# Library string and array together testing
+set(STRING_TEST_NAME string-array-test)
+add_executable(${STRING_TEST_NAME} ${STRING_TEST_NAME}.cpp)
+target_link_libraries(${STRING_TEST_NAME} GUIAPI_TYPES)
+add_test(${STRING_TEST_NAME} ${STRING_TEST_NAME})
