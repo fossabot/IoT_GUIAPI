@@ -1,28 +1,28 @@
-#ifndef __GUIAPI_ARRAY__
-#define __GUIAPI_ARRAY__
+#ifndef __GUIAPI_Vector__
+#define __GUIAPI_Vector__
 
 #include "stdint.h"
 #include "stdlib.h"
 
 template<class T>
-class GUIAPI_Array{
+class GUIAPI_Vector{
 
 public:
     /*****************************************************************************************/
-    GUIAPI_Array(){
+    GUIAPI_Vector(){
         this->arrayCapacity = 10;
         this->arrayLength = 0;
         items = (T*)calloc(arrayCapacity, sizeof(T));
     }
     /*****************************************************************************************/
-    GUIAPI_Array(uint32_t arrayCapacity){
+    GUIAPI_Vector(uint32_t arrayCapacity){
         this->arrayCapacity = arrayCapacity;
         this->arrayLength = 0;
         items = (T*)calloc(arrayCapacity, sizeof(T));
     }
 
     /*****************************************************************************************/
-    ~GUIAPI_Array(){
+    ~GUIAPI_Vector(){
         free(items);
     }
 
@@ -76,7 +76,7 @@ public:
     uint32_t capacity() { return arrayCapacity; }
 
     /*****************************************************************************************/
-    GUIAPI_Array& operator=(const GUIAPI_Array& nArray){
+    GUIAPI_Vector& operator=(const GUIAPI_Vector& nArray){
         empty();
         this->arrayCapacity = nArray.arrayCapacity;
         this->arrayLength = nArray.arrayLength;
@@ -86,7 +86,7 @@ public:
     }
 
     /*****************************************************************************************/
-    GUIAPI_Array& operator=(const T& items){
+    GUIAPI_Vector& operator=(const T& items){
         empty();
         for(T item : items)
             append(item);

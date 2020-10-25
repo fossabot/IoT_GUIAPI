@@ -1,9 +1,9 @@
-#include "GUIAPI_Array.h"
+#include "GUIAPI_Vector.h"
 #include "stdio.h"
 
 
 int main(){
-    GUIAPI_Array<int> firstTest;
+    GUIAPI_Vector<int> firstTest;
 
     //Testing new object
     if(firstTest.capacity() <= 0){
@@ -30,7 +30,7 @@ int main(){
     printf("\r\n");
 
     //Testing new array creating using second constructor with capacity
-    GUIAPI_Array<int> secondTest(20);
+    GUIAPI_Vector<int> secondTest(20);
     if(secondTest.capacity() != 20){
         printf("Capasity initialization test is failed.\r\n");
         return -4;
@@ -55,7 +55,7 @@ int main(){
     }
 
     //Testing fill, front & back methods
-    GUIAPI_Array<int> thirdTest;
+    GUIAPI_Vector<int> thirdTest;
     thirdTest.fill(28);
     if(thirdTest.front() != thirdTest.back()){
         printf("Filling array test is failed.\r\n");

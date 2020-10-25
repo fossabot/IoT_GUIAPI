@@ -1,10 +1,10 @@
 #include "GUIAPI_String.h"
-#include "GUIAPI_Array.h"
+#include "GUIAPI_Vector.h"
 #include "stdio.h"
 
 int main(){
     //String array creation test
-    GUIAPI_Array<GUIAPI_String> stringArray;
+    GUIAPI_Vector<GUIAPI_String> stringArray;
     if(stringArray.capacity() == 0){
         printf("Array initialisation test failed.");
         return -1;
@@ -31,7 +31,7 @@ int main(){
     }
 
     //Testing operator=
-    GUIAPI_Array<GUIAPI_String> stringArray_n;
+    GUIAPI_Vector<GUIAPI_String> stringArray_n;
     stringArray_n = stringArray;
     if(stringArray_n[5] != stringArray[5]){
         printf("Testing operator= failed.");

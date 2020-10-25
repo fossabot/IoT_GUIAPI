@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 #include "GUIAPI_String.h"
-#include "GUIAPI_Array.h"
+#include "GUIAPI_Vector.h"
 
 /**************************************************************************************/
 //This is the main class for all classes, except for one
@@ -120,7 +120,7 @@ public:
     
 private:
     void draw() {}
-    GUIAPI_Array<GUIAPI_LayoutItem> lItems;
+    GUIAPI_Vector<GUIAPI_LayoutItem> lItems;
     uint32_t iItems;
 
 };
