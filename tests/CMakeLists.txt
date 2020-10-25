@@ -1,3 +1,5 @@
+include(CTest)
+
 enable_testing()
 file(GLOB TESTS *.cpp *.h)
 add_executable(unit_testing ${TESTS})
