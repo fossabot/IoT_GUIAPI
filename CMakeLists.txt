@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 include_directories(datatypes/)
 add_subdirectory(datatypes/)
 
+enable_testing()
 add_subdirectory(Testing/)
 
 file(GLOB C_FILES *.c)

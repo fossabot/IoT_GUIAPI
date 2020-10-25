@@ -3,7 +3,7 @@
 
 int string_tests_passed = 0;
 
-int test_string(){
+int main(){
     //New string object from char array
     GUIAPI_String firstTest("Hello world!");
     if (firstTest.length() < 0){

@@ -3,7 +3,7 @@
 
 int array_tests_passed = 0;
 
-int test_array(){
+int main(){
     GUIAPI_Array<int> firstTest;
 
     //Testing new object

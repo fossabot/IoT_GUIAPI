@@ -1,8 +1,11 @@
-include(CTest)
+# Library array testing
+set(ARRAY_TEST_NAME array-test)
+add_executable(${ARRAY_TEST_NAME} ${ARRAY_TEST_NAME}.cpp)
+target_link_libraries(${ARRAY_TEST_NAME} GUIAPI_TYPES)
+add_test(${ARRAY_TEST_NAME} ${ARRAY_TEST_NAME})
 
-enable_testing()
-file(GLOB TESTS *.cpp *.h)
-add_executable(unit_testing ${TESTS})
-add_test(UNIT_TESTS unit_testing)
-set_property(TEST UNIT_TESTS PROPERTY LABELS label)
-target_link_libraries(unit_testing GUIAPI_TYPES)
+# Library string testing
+set(STRING_TEST_NAME string-test)
+add_executable(${STRING_TEST_NAME} ${STRING_TEST_NAME}.cpp)
+target_link_libraries(${STRING_TEST_NAME} GUIAPI_TYPES)
+add_test(${STRING_TEST_NAME} ${STRING_TEST_NAME})
