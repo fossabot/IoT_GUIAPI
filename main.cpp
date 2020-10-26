@@ -5,6 +5,10 @@
 #include "GUIAPI_String.h"
 #include "GUIAPI_Vector.h"
 
+#include "GUIAPI_ScreenEmulator.h"
+
+#include <random>
+
 /**************************************************************************************/
 //This is the main class for all classes, except for one
 /**************************************************************************************/
@@ -196,11 +200,21 @@ private:
     uint32_t selectedLayout;
 };
 
-int main(){
+int main(int argc, char* argv[]){
 
-  while (1){
-  
-  }
-  return 0;
+  GUIAPI_ScreenEmulator emu(240, 320);
+    emu.init(argc, argv);
+
+    std::random_device rd; // obtain a random number from hardware
+    std::mt19937 gen(rd()); // seed the generator
+    std::uniform_int_distribution<> distr(0, 200); // define the range
+
+    while(true){
+        //emu.clear();
+        emu.setPixel(distr(gen), distr(gen));
+        emu.display();
+    }
+    system("pause");
+    return 0;
 }
 

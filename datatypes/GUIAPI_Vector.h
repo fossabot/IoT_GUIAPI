@@ -77,7 +77,7 @@ public:
 
     /*****************************************************************************************/
     GUIAPI_Vector& operator=(const GUIAPI_Vector& nArray){
-        empty();
+        free(items);
         this->arrayCapacity = nArray.arrayCapacity;
         this->arrayLength = nArray.arrayLength;
         items = (T*)calloc(this->arrayCapacity, sizeof(T));
