@@ -38,7 +38,7 @@ void Layout_destroy(CGUILayout* pLayout)
 
 
 /*************************************************************************/
-void Layout_addWidget(CGUILayout* pLayout, CGUIWidget* widget)
+void Layout_addWidget(CGUILayout* pLayout, CGUIWidget* widget, int x_pos, int y_pos)
 {
 	//добавляем его в список виджетов для данного лэйаута
 	pushList();
@@ -49,4 +49,10 @@ void Layout_addWidget(CGUILayout* pLayout, CGUIWidget* widget)
 void Layout_draw(CGUILayout* pLayout)
 {
 	//проходимся по всему списку виджетов и вызываем метод Widget_draw для каждого
+}
+
+/*************************************************************************/
+void Layout_findWidget(CGUILayout* pLayout, CGUIWidget* widget, int* x_pos, int* y_pos)
+{
+	findListByValue(widget, x_pos, y_pos);
 }

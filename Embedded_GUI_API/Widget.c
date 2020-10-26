@@ -5,15 +5,19 @@
 struct CGUIWidget_
 {
 	void* pUData;
+	
+	//коллбэки для доступу к драйверу дисплея
+	SGUI_Callbacks* pstCallbacks;
 
 	//Параметры виджета
 	EWidgetType eType;
 	int			height;
 	int			width;
+	char*		text;
 };
 
 /*************************************************************************/
-void Widget_create(CGUIWidget** ppWidget, void* pUData)
+void Widget_create(CGUIWidget** ppWidget, const SGUI_Callbacks* pstCallbacks, void* pUData)
 {
 	CGUIWidget* pWidget;
 
@@ -24,6 +28,9 @@ void Widget_create(CGUIWidget** ppWidget, void* pUData)
 	//проверяем, что объект создан
 	if (!pWidget)
 		return /*GUI_RESULT_OUT_OF_MEMORY*/;
+
+	pWidget->pUData       = pUData;
+	pWidget->pstCallbacks = pstCallbacks;
 
 	//return GUI_RESULT_SUCCESSFUL;
 }
@@ -40,7 +47,8 @@ void Widget_draw(CGUIWidget* pWidget)
 {
 	switch (pWidget->eType)
 	{
-		//рисуем попиксельно в прямоугольнике height*width
+		//рисуем попиксельно виджет нужного типа в прямоугольнике height*width, 
+		//дергаем драйвер дисплея через pWidget->pstCallbacks->fnDrawPixel();
 
 	case EWIDGET_TYPE_BUTTON:
 		break;

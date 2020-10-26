@@ -14,7 +14,7 @@ typedef enum EWidgetType_
 typedef struct CGUIWidget_ CGUIWidget;
 
 /*************************************************************************/
-void/*EGUIResult*/ Widget_create(CGUIWidget** ppWidget, void* pUData);
+void/*EGUIResult*/ Widget_create(CGUIWidget** ppWidget, const SGUI_Callbacks* pstCallbacks, void* pUData);
 void/*EGUIResult*/ Widget_destroy(CGUIWidget* pWidget);
 
 void/*EGUIResult*/ Widget_draw(CGUIWidget* pWidget);
