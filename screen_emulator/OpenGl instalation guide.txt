@@ -1,1 +1,6 @@
+cmake -G "MinGW Makefiles" -S . -B . -DCMAKE_INSTALL_PREFIX=D:\mingw-w64\mingw64\x86_64-w64-mingw32
+mingw32-make all
+mingw32-make install
 https://medium.com/@bhargav.chippada/how-to-setup-opengl-on-mingw-w64-in-windows-10-64-bits-b77f350cea7e
+End after install
+http://glad.dav1d.de/#profile=core&specification=gl&api=gl%3D3.3&api=gles1%3Dnone&api=gles2%3Dnone&api=glsc2%3Dnone&language=c&loader=on

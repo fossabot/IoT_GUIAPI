@@ -200,19 +200,85 @@ private:
     uint32_t selectedLayout;
 };
 
+uint32_t width = 240;
+uint32_t height = 320;
+
+void drawPixelsTest(GUIAPI_ScreenEmulator *emu){
+    emu->clear();
+
+    for(uint32_t i = 0; i < 100; i++){
+        emu->drawPixel(rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+        emu->display();
+    }
+}
+
+void drawLinesTest(GUIAPI_ScreenEmulator *emu){
+    emu->clear();
+    for (int16_t x=0; x < width; x+=6){
+        emu->drawLine(0, 0, x, height-1, GUIAPI_ScreenEmulator::CL_WHITE());
+        emu->display();
+    }
+        
+    for (int16_t y=0; y < height; y+=6){
+        emu->drawLine(0, 0, width-1, y, GUIAPI_ScreenEmulator::CL_RED());
+        emu->display();
+    }
+
+    emu->clear();
+    for (int16_t x=0; x < width; x+=6){
+        emu->drawLine(width-1, 0, x, height-1, GUIAPI_ScreenEmulator::CL_GREEN());
+        emu->display();
+    }
+
+    for (int16_t y=0; y < height; y+=6){
+        emu->drawLine(width-1, 0, 0, y, GUIAPI_ScreenEmulator::CL_BLUE());
+        emu->display();
+    }
+
+    emu->clear();
+    for (int16_t x=0; x < width; x+=6){
+        emu->drawLine(0, height-1, x, 0, GUIAPI_ScreenEmulator::CL_PINK());
+        emu->display();
+    }
+
+    for (int16_t y=0; y < height; y+=6){
+        emu->drawLine(0, height-1, width-1, y, GUIAPI_ScreenEmulator::CL_MAGENTA());
+        emu->display();
+    }
+
+    emu->clear();
+    for (int16_t x=0; x < width; x+=6){
+        emu->drawLine(width-1, height-1, x, 0, GUIAPI_ScreenEmulator::CL_YELLOW());
+        emu->display();
+    }
+
+    for (int16_t y=0; y < height; y+=6){
+        emu->drawLine(width-1, height-1, 0, y, GUIAPI_ScreenEmulator::CL_GREY());
+        emu->display();
+    }
+}
+
 int main(int argc, char* argv[]){
 
-  GUIAPI_ScreenEmulator emu(240, 320);
-
-    std::random_device rd; // obtain a random number from hardware
-    std::mt19937 gen(rd()); // seed the generator
-    std::uniform_int_distribution<> distr(0, 200); // define the range
+    GUIAPI_ScreenEmulator emu(width, height);
 
     while(emu.getWindowWorker()){
         //emu.clear();
+        /*drawPixelsTest(&emu);
+        _sleep(1000);
+        drawLinesTest(&emu);
+        _sleep(1000);*/
+        /*emu.drawLine(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+        emu.drawFastHLine(rand()%240, rand()%320, rand()%240, GUIAPI_ScreenEmulator::getRandomColor());
+        emu.drawFastVLine(rand()%240, rand()%320, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+        emu.drawRect(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+        emu.fillRect(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+        emu.drawCircle(rand()%240, rand()%320, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
+        emu.fillCircle(rand()%240, rand()%320, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
+        emu.drawEllipse(rand()%240, rand()%320, rand()%100, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
+        emu.fillEllipse(rand()%240, rand()%320, rand()%100, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());*/
+        //emu.display();
 
-        emu.setPixel(distr(gen), distr(gen));
-        emu.display();
     }
     return 0;
 }
