@@ -7,6 +7,8 @@
 #include <GL/glew.h> 
 #include <GLFW/glfw3.h>
 
+#include "pthread.h"
+
 
 typedef struct{
     float r, g, b;
@@ -20,19 +22,30 @@ public:
 
     void setScreenSize(uint32_t width, uint32_t height);
 
-    void init(int argc, char** argv);
+    void init();
 
     void setPixel(uint32_t x, uint32_t y);
     void setColor(float r, float g, float b);
     void setColor(Pixel color);
     void display();
     void clear();
-private:
+
+    bool getWindowWorker();
+public:
     GLFWwindow* window;
+    bool isThreadStopped;
+    bool running;
+    bool isDrawRequired;
+
+    pthread_mutex_t drawingMutex;
+
+private:
     uint32_t width;
     uint32_t height;
 
     uint32_t xPos, yPos;
+
+    pthread_t drawingThread;
 
 public:
     void drawFrame();
