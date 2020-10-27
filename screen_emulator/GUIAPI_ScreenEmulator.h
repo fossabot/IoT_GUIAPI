@@ -14,7 +14,7 @@ typedef struct{
 } Color;
 
 typedef struct{
-    uint32_t x, y;
+    float x, y, z;
 } Position;
 
 typedef struct{
@@ -42,6 +42,7 @@ public:
 
 /********************************Public GFX Methods**************************************/
 public:
+    void drawPixel(float x, float y, Color color);
     void drawPixel(uint32_t x, uint32_t y, Color color);
     void drawLine(uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, Color color);
     void drawFastVLine(uint32_t x, uint32_t y, uint32_t h, Color color);
@@ -78,6 +79,7 @@ public:
 /**********************************GL private variables**************************************/
 private:
     GLFWwindow* window;
+    void* gpuMemAddr;
     GLuint VBO, VAO;
     ShaderLoader shaderLoader;
 
@@ -92,7 +94,7 @@ private:
     uint32_t cursorY;
 
     uint64_t pixelCounter;
-    Pixel *pixels;
+    float *vertices;
 
 private:
     void setPixel(Pixel pixel);

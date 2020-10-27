@@ -43,6 +43,7 @@ GUIAPI_ScreenEmulator::GUIAPI_ScreenEmulator(uint32_t sWidth, uint32_t sHeight){
 GUIAPI_ScreenEmulator::~GUIAPI_ScreenEmulator(){
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    free(vertices);
     glfwTerminate();
 }
 
@@ -50,7 +51,7 @@ GUIAPI_ScreenEmulator::~GUIAPI_ScreenEmulator(){
 void GUIAPI_ScreenEmulator::setScreenSize(uint32_t width, uint32_t height){
     this->width = width;
     this->height = height;
-    //pixels = (Pixel*)calloc(width*height, sizeof(Pixel));
+    vertices = (float*)calloc(width*height, sizeof(float));
     pixelCounter = 0;
     //glViewport(0, 0, width, height);
 }
@@ -107,18 +108,14 @@ bool GUIAPI_ScreenEmulator::init(std::string shaderFolderPath){
 
 /*****************************************************************************************/
 void GUIAPI_ScreenEmulator::initVertexes(){
-    float vertices[] = {
-         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
-         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top 
-    };
 
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
 
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    //sizeof(vertices)
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * width*height, 0, GL_DYNAMIC_DRAW);
 
     // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -134,11 +131,11 @@ void GUIAPI_ScreenEmulator::display(){
     std::chrono::steady_clock::time_point cur = std::chrono::steady_clock::now();
     const float dt = std::chrono::duration< float >( cur - prv ).count();
     prv = cur;*/
-
+    
     glUseProgram(shaderLoader.getProgram());
     glBindVertexArray(VAO);
 
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 0, pixelCounter);
 
     //printf("FPS: %f\r\n", 1000/dt);
 
@@ -150,8 +147,9 @@ void GUIAPI_ScreenEmulator::display(){
 void GUIAPI_ScreenEmulator::clear(){
     Pixel pixel;
 
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+    for(uint32_t i = 0; i < width*height; i++)  vertices[i] = 0.0f;
     pixelCounter = 0;
 }
 
@@ -176,32 +174,37 @@ void GUIAPI_ScreenEmulator::keyboardHandler(unsigned char c, int scancode, int a
 
 /*****************************************************************************************/
 void GUIAPI_ScreenEmulator::setPixel(Pixel pixel){
-    setColor(pixel.color);
-    setPosition(pixel.pos);
-}
+    union dataToData{
+        Pixel pix;
+        float floats[6];
+    } data;
 
-/*****************************************************************************************/
-void GUIAPI_ScreenEmulator::setColor(Color color){
-    //glColor3f(color.r, color.g, color.b);
-    //glColorP3ui(color.r, color.g, color.b);
-}
-
-/*****************************************************************************************/
-void GUIAPI_ScreenEmulator::setPosition(Position position){
-    //glVertex2i(position.x, position.y);
-    //glVertexP2ui(position.x, position.y);
+    data.pix = pixel;
+    for(uint32_t i = 0; i < 6; i++){
+        vertices[i + pixelCounter * 6] = data.floats[i];
+    }
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*width*height, vertices);
+     //glEnableVertexAttribArray(0);
 }
 
 /*****************************************************************************************/
 /**********************************Drawing GFX methods************************************/
 /*****************************************************************************************/
-void GUIAPI_ScreenEmulator::drawPixel(uint32_t x, uint32_t y, Color color){
+void GUIAPI_ScreenEmulator::drawPixel(float x, float y, Color color){
     Pixel pixel;
     pixel.pos.x = x;
     pixel.pos.y = y;
+    pixel.pos.z = 0.0f;
     pixel.color = color;
-    //if(pixelCounter < width*height)
-    //pixels[pixelCounter++] = pixel;
+    setPixel(pixel);
+    pixelCounter++;
+}
+
+/*****************************************************************************************/
+void GUIAPI_ScreenEmulator::drawPixel(uint32_t x, uint32_t y, Color color){
+    float x0 = ((2.0f*(float)x+1.0f)/width)-1.0f;
+    float y0 = ((2.0f*(float)y+1.0f)/height)-1.0f;
+    drawPixel(x0, y0, color);
 }
 
 /*****************************************************************************************/

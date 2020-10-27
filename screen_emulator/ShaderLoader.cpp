@@ -103,7 +103,6 @@ void ShaderLoader::loadShaders(std::string  shaderFolder){
             }else{
                 glAttachShader(programm_ID, temporaryShaderId);
                 compiledShaders.push_back(temporaryShaderId);
-                std::cout << "Shaderd id: " << compiledShaders.back() << std::endl;
             }
         }
     }
