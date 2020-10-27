@@ -261,25 +261,27 @@ void drawLinesTest(GUIAPI_ScreenEmulator *emu){
 int main(int argc, char* argv[]){
 
     GUIAPI_ScreenEmulator emu(width, height);
+    if(emu.init("..\\screen_emulator\\shaders\\")){
+        while(emu.getWindowWorker()){
+            emu.clear();
+            /*drawPixelsTest(&emu);
+            _sleep(1000);
+            drawLinesTest(&emu);
+            _sleep(1000);*/
+            /*emu.drawLine(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+            emu.drawFastHLine(rand()%240, rand()%320, rand()%240, GUIAPI_ScreenEmulator::getRandomColor());
+            emu.drawFastVLine(rand()%240, rand()%320, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+            emu.drawRect(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+            emu.fillRect(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+            emu.drawCircle(rand()%240, rand()%320, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
+            emu.fillCircle(rand()%240, rand()%320, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
+            emu.drawEllipse(rand()%240, rand()%320, rand()%100, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
+            emu.fillEllipse(rand()%240, rand()%320, rand()%100, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());*/
+            emu.display();
 
-    while(emu.getWindowWorker()){
-        //emu.clear();
-        /*drawPixelsTest(&emu);
-        _sleep(1000);
-        drawLinesTest(&emu);
-        _sleep(1000);*/
-        /*emu.drawLine(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
-        emu.drawFastHLine(rand()%240, rand()%320, rand()%240, GUIAPI_ScreenEmulator::getRandomColor());
-        emu.drawFastVLine(rand()%240, rand()%320, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
-        emu.drawRect(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
-        emu.fillRect(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
-        emu.drawCircle(rand()%240, rand()%320, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
-        emu.fillCircle(rand()%240, rand()%320, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
-        emu.drawEllipse(rand()%240, rand()%320, rand()%100, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
-        emu.fillEllipse(rand()%240, rand()%320, rand()%100, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());*/
-        //emu.display();
-
+        }
     }
+    system("pause");
     return 0;
 }
 

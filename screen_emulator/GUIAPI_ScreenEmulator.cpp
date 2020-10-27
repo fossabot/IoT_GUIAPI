@@ -7,7 +7,6 @@
 #include <chrono>
 #include <cmath>
 
-#include "shaders.h"
 #include "character_codes.h"
 
 static GUIAPI_ScreenEmulator* pData;
@@ -32,18 +31,18 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 GUIAPI_ScreenEmulator::GUIAPI_ScreenEmulator(){
     setScreenSize(240, 320);
     pixelCounter = 0;
-    init();
 }
 
 /*****************************************************************************************/
 GUIAPI_ScreenEmulator::GUIAPI_ScreenEmulator(uint32_t sWidth, uint32_t sHeight){
     setScreenSize(sWidth, sHeight);
     pixelCounter = 0;
-    init();
 }
 
 /*****************************************************************************************/
 GUIAPI_ScreenEmulator::~GUIAPI_ScreenEmulator(){
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
     glfwTerminate();
 }
 
@@ -53,19 +52,20 @@ void GUIAPI_ScreenEmulator::setScreenSize(uint32_t width, uint32_t height){
     this->height = height;
     //pixels = (Pixel*)calloc(width*height, sizeof(Pixel));
     pixelCounter = 0;
-    glViewport(0, 0, width, height);
+    //glViewport(0, 0, width, height);
 }
 
 /*****************************************************************************************/
 /**************************************INITIALISATION*************************************/
 /*****************************************************************************************/
-void GUIAPI_ScreenEmulator::init(){
+bool GUIAPI_ScreenEmulator::init(std::string shaderFolderPath){
+    printf("Before init anything is ok.\r\n");
     glfwInit();
+
+    #ifdef __APPLE__
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
 
@@ -73,7 +73,7 @@ void GUIAPI_ScreenEmulator::init(){
 	if (window == NULL) {
 		fprintf(stdout, "Failed to create GLFW window!\n");
 		glfwTerminate();
-		return;
+		return false;
 	}
 
     glfwMakeContextCurrent(window);
@@ -84,19 +84,14 @@ void GUIAPI_ScreenEmulator::init(){
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
         fprintf(stdout, "Failed to initialize GLAD\n");
-        return;
+        return false;
     }
 
     //Shaders initialisation
-    //initShaders();
+    shaderLoader.loadShaders(shaderFolderPath);
 
     //Init vertex array
-    //initVertexes();
-
-    /*GLenum result = glewInit();
-	if(result != GLEW_OK){
-        fprintf(stdout, "GLEW init error. %s\r\n", glewGetErrorString(result));
-    }*/
+    initVertexes();
 
     #ifdef GL_SHADING_LANGUAGE_VERSION
         printf("Supported GLSL version is %s.\n", (char *)glGetString(GL_SHADING_LANGUAGE_VERSION));
@@ -107,94 +102,45 @@ void GUIAPI_ScreenEmulator::init(){
 	printf("Press ESCAPE or 'X' or 'x' to exit.\n");
 
     pData = this;
-}
-
-/*****************************************************************************************/
-void GUIAPI_ScreenEmulator::initShaders(){
-    int success;
-    char infoLog[512];
-
-    vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
-    glCompileShader(vertex_shader);
-    glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
-    if (!success){
-        glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
-        fprintf(stdout, "ERROR::SHADER::VERTEX::COMPILATION_FAILED.\n %s\n", infoLog);
-    }
-
-    fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment_shader, 1, &fragment_shader_text, NULL);
-    glCompileShader(fragment_shader);
-    glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
-    if (!success){
-        glGetShaderInfoLog(fragment_shader, 512, NULL, infoLog);
-        fprintf(stdout, "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED.\n %s\n", infoLog);
-    }
-
-    program = glCreateProgram();
-    glAttachShader(program, vertex_shader);
-    glAttachShader(program, fragment_shader);
-    glLinkProgram(program);
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
-    if (!success) {
-        glGetProgramInfoLog(program, 512, NULL, infoLog);
-        fprintf(stdout, "ERROR::SHADER::PROGRAM::LINKING_FAILED.\n %s\n", infoLog);
-    }
-
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
+    return true;
 }
 
 /*****************************************************************************************/
 void GUIAPI_ScreenEmulator::initVertexes(){
     float vertices[] = {
-         0.5f,  0.5f, 0.0f,  // top right
-         0.5f, -0.5f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f   // top left 
-    };
-    unsigned int indices[] = {  // note that we start from 0!
-        0, 1, 3,  // first Triangle
-        1, 2, 3   // second Triangle
+         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom right
+        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
+         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top 
     };
 
     glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-
     glBindVertexArray(VAO);
+
+    glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glBindVertexArray(0);
+    // color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 }
 
 /*****************************************************************************************/
 void GUIAPI_ScreenEmulator::display(){
-    static std::chrono::steady_clock::time_point prv = std::chrono::steady_clock::now();
+    /*static std::chrono::steady_clock::time_point prv = std::chrono::steady_clock::now();
     std::chrono::steady_clock::time_point cur = std::chrono::steady_clock::now();
     const float dt = std::chrono::duration< float >( cur - prv ).count();
-    prv = cur;
+    prv = cur;*/
 
-    glUseProgram(program);
+    glUseProgram(shaderLoader.getProgram());
     glBindVertexArray(VAO);
 
-    glDrawElements(GL_POINTS, 6, GL_UNSIGNED_INT, 0);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 
-    //glBegin(GL_POINTS);
-    //for(uint32_t i = 0; i < pixelCounter; i++) setPixel(pixels[i]);
-    //glEnd();
-
-    printf("FPS: %f\r\n", 1000/dt);
+    //printf("FPS: %f\r\n", 1000/dt);
 
     glfwSwapBuffers(window);
     glfwPollEvents();
@@ -204,15 +150,8 @@ void GUIAPI_ScreenEmulator::display(){
 void GUIAPI_ScreenEmulator::clear(){
     Pixel pixel;
 
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f );
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    //glMatrixMode(GL_PROJECTION);
-    //glLoadIdentity();
-    //glOrtho(0,width,height,0,100,-100);
-    //glMatrixMode(GL_MODELVIEW);
-    //glLoadIdentity();
-    //free(pixels);
-    //pixels = (Pixel*)calloc(width*height, sizeof(Pixel));
     pixelCounter = 0;
 }
 

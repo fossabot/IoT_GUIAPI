@@ -4,8 +4,9 @@
 #include "stdint.h"
 
 #define GLEW_STATIC
-//#include <GL/glew.h> 
-#include "glad/glad.h"
+
+#include "ShaderLoader.h"
+//#include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
 typedef struct{
@@ -29,9 +30,8 @@ public:
 
     void setScreenSize(uint32_t width, uint32_t height);
 
-    void init();
+    bool init(std::string shaderFolderPath);
 
-    void initShaders();
     void initVertexes();
 
     void setColor(Pixel &pixel);
@@ -78,10 +78,8 @@ public:
 /**********************************GL private variables**************************************/
 private:
     GLFWwindow* window;
-    GLuint VBO, VAO, EBO;
-    GLuint vertex_shader;
-    GLuint fragment_shader;
-    GLuint program;
+    GLuint VBO, VAO;
+    ShaderLoader shaderLoader;
 
 /**********************************Emulator variables**************************************/
 private:
