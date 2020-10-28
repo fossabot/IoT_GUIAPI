@@ -8,6 +8,7 @@
 #include "GUIAPI_ScreenEmulator.h"
 
 #include <random>
+#include <unistd.h>
 
 /**************************************************************************************/
 //This is the main class for all classes, except for one
@@ -215,7 +216,7 @@ void drawPixelsTest(GUIAPI_ScreenEmulator *emu){
 void drawLinesTest(GUIAPI_ScreenEmulator *emu){
     emu->clear();
     for (int16_t x=0; x < width; x+=6){
-        emu->drawLine(0, 0, x, height-1, GUIAPI_ScreenEmulator::CL_WHITE());
+        emu->drawLine(0, 0, x, height-1, GUIAPI_ScreenEmulator::getRandomColor());
         emu->display();
     }
         
@@ -258,6 +259,72 @@ void drawLinesTest(GUIAPI_ScreenEmulator *emu){
     }
 }
 
+void drawFastLinesTest(GUIAPI_ScreenEmulator *emu){
+    emu->clear();
+    for (int16_t y=0; y < height; y+=5) {
+        emu->drawFastHLine(0, y, width, GUIAPI_ScreenEmulator::CL_MAGENTA());
+        emu->display();
+    }
+    for (int16_t x=0; x < width; x+=5) {
+        emu->drawFastVLine(x, 0, height, GUIAPI_ScreenEmulator::CL_YELLOW());
+        emu->display();
+    }
+}
+
+void drawRectTest(GUIAPI_ScreenEmulator *emu){
+    emu->clear();
+    for (int16_t x=0; x < width; x+=6) {
+        emu->drawRect(width/2 -x/2, height/2 -x/2 , x, x, GUIAPI_ScreenEmulator::getRandomColor());
+        emu->display();
+  }
+}
+
+void drawFillRectTest(GUIAPI_ScreenEmulator *emu){
+    emu->clear();
+    for (int16_t x=0; x < width; x+=6) {
+        emu->clear();
+        emu->fillRect(width/2 -x/2, height/2 -x/2 , x, x, GUIAPI_ScreenEmulator::getRandomColor());
+        emu->display();
+  }
+}
+
+void drawTriangleTest(GUIAPI_ScreenEmulator *emu){
+    emu->clear();
+    int x = height-1;
+    int y = 0;
+    int z = width;
+    for(uint32_t t = 0 ; t <= 15; t++) {
+        emu->drawTriangle(width/2, y, y, x, z, x, GUIAPI_ScreenEmulator::getRandomColor());
+        x-=4;
+        y+=4;
+        z-=4;
+        emu->display();
+    }
+}
+
+void drawCirclesTest(GUIAPI_ScreenEmulator *emu){
+    emu->clear();
+    uint32_t radius = 10;
+    for (int16_t x=0; x < width+radius; x+=radius*2) {
+        for (int16_t y=0; y < height+radius; y+=radius*2) {
+            emu->drawCircle(x, y, radius, GUIAPI_ScreenEmulator::getRandomColor());
+        }
+    }
+    emu->display();
+}
+
+void drawFillCirclesTest(GUIAPI_ScreenEmulator *emu){
+    emu->clear();
+    uint32_t radius = 10;
+    for (int16_t x=0; x < width+radius; x+=radius*2) {
+        for (int16_t y=0; y < height+radius; y+=radius*2) {
+            emu->clear();
+            emu->fillCircle(x, y, radius, GUIAPI_ScreenEmulator::getRandomColor());
+            emu->display();
+        }
+    }
+}
+
 int main(int argc, char* argv[]){
 
     GUIAPI_ScreenEmulator emu(width, height);
@@ -265,20 +332,21 @@ int main(int argc, char* argv[]){
         while(emu.getWindowWorker()){
             emu.clear();
             drawPixelsTest(&emu);
-            _sleep(1000);
+            usleep(500000);
             drawLinesTest(&emu);
-            _sleep(1000);
-            /*emu.drawLine(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
-            emu.drawFastHLine(rand()%240, rand()%320, rand()%240, GUIAPI_ScreenEmulator::getRandomColor());
-            emu.drawFastVLine(rand()%240, rand()%320, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
-            emu.drawRect(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
-            emu.fillRect(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
-            emu.drawCircle(rand()%240, rand()%320, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
-            emu.fillCircle(rand()%240, rand()%320, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
-            emu.drawEllipse(rand()%240, rand()%320, rand()%100, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());
-            emu.fillEllipse(rand()%240, rand()%320, rand()%100, rand()%100, GUIAPI_ScreenEmulator::getRandomColor());*/
-            emu.display();
-
+            usleep(500000);
+            drawFastLinesTest(&emu);
+            usleep(500000);
+            drawRectTest(&emu);
+            usleep(500000);
+            drawFillRectTest(&emu);
+            usleep(500000);
+            drawTriangleTest(&emu);
+            usleep(500000);
+            drawCirclesTest(&emu);
+            usleep(500000);
+            drawFillCirclesTest(&emu);
+            usleep(500000);
         }
     }
     system("pause");

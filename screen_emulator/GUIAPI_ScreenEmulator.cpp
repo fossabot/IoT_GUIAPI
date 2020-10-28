@@ -43,7 +43,6 @@ GUIAPI_ScreenEmulator::GUIAPI_ScreenEmulator(uint32_t sWidth, uint32_t sHeight){
 GUIAPI_ScreenEmulator::~GUIAPI_ScreenEmulator(){
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
-    free(vertices);
     glfwTerminate();
 }
 
@@ -51,7 +50,6 @@ GUIAPI_ScreenEmulator::~GUIAPI_ScreenEmulator(){
 void GUIAPI_ScreenEmulator::setScreenSize(uint32_t width, uint32_t height){
     this->width = width;
     this->height = height;
-    vertices = (float*)calloc(6*width*height, sizeof(float));
     pixelCounter = 0;
 }
 
@@ -120,8 +118,8 @@ void GUIAPI_ScreenEmulator::initVertexes(){
 
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    //sizeof(vertices)
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * width*height, 0, GL_DYNAMIC_DRAW);
+
+    glBufferData(GL_ARRAY_BUFFER, getBufferSize(), 0, GL_DYNAMIC_DRAW);
 
     // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -153,11 +151,8 @@ void GUIAPI_ScreenEmulator::display(){
 
 /*****************************************************************************************/
 void GUIAPI_ScreenEmulator::clear(){
-
-    free(vertices);
-    vertices = (float*)calloc(6*width*height, sizeof(float));
     //glDeleteBuffers();
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * width*height, 0, GL_DYNAMIC_DRAW);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * width*height, 0, GL_DYNAMIC_DRAW);
     pixelCounter = 0;
 }
 
@@ -199,11 +194,7 @@ void GUIAPI_ScreenEmulator::setPixel(Pixel pixel){
     } data;
 
     data.pix = pixel;
-    for(uint32_t i = 0; i < 6; i++){
-        vertices[i + pixelCounter * 6] = data.floats[i];
-    }
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*width*height, vertices);
-    //glBufferSubData(GL_ARRAY_BUFFER, 0, 18, data.floats);
+    glBufferSubData(GL_ARRAY_BUFFER, pixelCounter*sizeof(data.floats), sizeof(data.floats), &data.floats);
 }
 
 /*****************************************************************************************/
@@ -216,7 +207,7 @@ void GUIAPI_ScreenEmulator::drawPixel(uint32_t x, uint32_t y, Color color){
 }
 
 /*****************************************************************************************/
-void GUIAPI_ScreenEmulator::drawLine(uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, Color color){
+void GUIAPI_ScreenEmulator::drawLine(int32_t x0, int32_t y0, int32_t x1, int32_t y1, Color color){
     int steep = abs(y1 - y0) > abs(x1 - x0);
     if (steep) {
         swap(x0, y0);
@@ -306,6 +297,30 @@ void GUIAPI_ScreenEmulator::fillCircle(uint32_t x, uint32_t y, uint32_t radius, 
 }
 
 /*****************************************************************************************/
+void GUIAPI_ScreenEmulator::roundRect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint32_t r, Color color){
+    uint32_t max_radius = ((w < h) ? w : h) / 2; // 1/2 minor axis
+    //if (r > max_radius)
+    //    r = max_radius;
+    // smarter version
+    //writeFastHLine(x + r, y, w - 2 * r, color);         // Top
+    //writeFastHLine(x + r, y + h - 1, w - 2 * r, color); // Bottom
+    //writeFastVLine(x, y + r, h - 2 * r, color);         // Left
+    //writeFastVLine(x + w - 1, y + r, h - 2 * r, color); // Right
+    // draw four corners
+    //drawCircleHelper(x + r, y + r, r, 1, color);
+    //drawCircleHelper(x + w - r - 1, y + r, r, 2, color);
+    //drawCircleHelper(x + w - r - 1, y + h - r - 1, r, 4, color);
+    //drawCircleHelper(x + r, y + h - r - 1, r, 8, color);
+}
+
+/*****************************************************************************************/
+void GUIAPI_ScreenEmulator::drawTriangle(uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, Color color){
+    drawLine(x0, y0, x1, y1, color);
+    drawLine(x1, y1, x2, y2, color);
+    drawLine(x2, y2, x0, y0, color);
+}
+
+/*****************************************************************************************/
 void GUIAPI_ScreenEmulator::drawChar(uint32_t x, uint32_t y, Color bg, Color color, uint32_t size, unsigned char c){
     if((x >= width) ||(y >= height) || ((x + 4) < 0) || ((y + 7) < 0)) return;
 	if(c<128)            c = c-32;
@@ -357,7 +372,7 @@ float GUIAPI_ScreenEmulator::getRandomFloat(){
         uint32_t i;
         float f;
     } r;
-    r.i = (rand() & 0xffff) + ((rand() & 0x3fff) << 16);
+    r.i = (rand() & 0xffffff) + ((rand() & 0x3fffff) << 16);
     return r.f;
 }
 

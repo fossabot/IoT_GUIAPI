@@ -44,7 +44,7 @@ public:
 /********************************Public GFX Methods**************************************/
 public:
     void drawPixel(uint32_t x, uint32_t y, Color color);
-    void drawLine(uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, Color color);
+    void drawLine(int32_t x0, int32_t y0, int32_t x1, int32_t y1, Color color);
     void drawFastVLine(uint32_t x, uint32_t y, uint32_t h, Color color);
     void drawFastHLine(uint32_t x, uint32_t y, uint32_t w, Color color);
     void drawRect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, Color color);
@@ -54,7 +54,8 @@ public:
     void fillEllipse(uint32_t x, uint32_t y, uint32_t width, uint32_t height, Color color);
     void drawCircle(uint32_t x, uint32_t y, uint32_t radius, Color color);
     void fillCircle(uint32_t x, uint32_t y, uint32_t radius, Color color);
-    //void drawTriangle();
+    void roundRect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint32_t r, Color color);
+    void drawTriangle(uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, Color color);
     //void fillTriangle();
 
     void drawChar(uint32_t x, uint32_t y, Color bg, Color color, uint32_t size, unsigned char c);
@@ -94,13 +95,12 @@ private:
     uint32_t cursorY;
 
     uint64_t pixelCounter;
-    float *vertices;
-
 private:
     void createPixel(float x, float y, Color color);
     void setPixel(Pixel pixel);
+    uint64_t getBufferSize() { return sizeof(float) * 6 * width*height; }
 
-    void swap(uint32_t &a, uint32_t &b) { 
+    void swap(int32_t &a, int32_t &b) { 
         uint32_t t = a; 
         a = b; 
         b = t; 
