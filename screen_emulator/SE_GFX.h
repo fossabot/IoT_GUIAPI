@@ -38,12 +38,27 @@ public:
 
     void drawChar(uint32_t x, uint32_t y, Color bg, Color color, uint32_t size, unsigned char c);
     void print(const char* str);
+    void print(const char* str, Color txColor);
+    void print(const char* str, Color txColor, Color bgColor);
+    void printText(const char* str);
+    void printText(const char* str, Color txColor);
+    void printText(const char* str, Color txColor, Color bgColor);
     void println(const char* str);
+    void println(const char* str, Color txColor);
+    void println(const char* str, Color txColor, Color bgColor);
+    void newString();
+
+    void setCursor(uint32_t x, uint32_t y) { cursorX = x; cursorY = y; }
+    void setCursorDefault() { cursorX = 0; cursorY = height - 3; }
 private:
     fnSetPix fnSetPixel;
     //Screen size
     uint64_t width;
     uint64_t height;
+    //Text cursor
+    uint32_t cursorX;
+    uint32_t cursorY;
+    uint32_t textSize;
 
     void swap(int32_t &a, int32_t &b) { 
         uint32_t t = a; 

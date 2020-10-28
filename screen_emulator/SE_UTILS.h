@@ -42,6 +42,14 @@ static Color getRandomColor(){
     return RGBtoColor(getRandomFloat(), getRandomFloat(), getRandomFloat());
 }
 
+/*****************************************************************************************/
+static bool isColorsSame(Color col1, Color col2){
+    if(col1.r != col2.r) return false;
+    else if(col1.g != col2.g) return false;
+    else if(col1.b != col2.b) return false;
+    else return true;
+}
+
 //Color definitions
 static Color CL_BLACK()   { return RGBtoColor(0.0f, 0.0f, 0.0f); }
 static Color CL_WHITE()   { return RGBtoColor(1.0f, 1.0f, 1.0f); }

@@ -41,10 +41,6 @@ private:
 
 /**********************************Emulator variables**************************************/
 private:
-    //Text cursor
-    uint32_t cursorX;
-    uint32_t cursorY;
-
     uint64_t pixelCounter;
 
 private:

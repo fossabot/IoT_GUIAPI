@@ -130,10 +130,10 @@ void SE_MAIN::initVertexes(){
 
 /*****************************************************************************************/
 void SE_MAIN::display(){
-    /*static std::chrono::steady_clock::time_point prv = std::chrono::steady_clock::now();
+    static std::chrono::steady_clock::time_point prv = std::chrono::steady_clock::now();
     std::chrono::steady_clock::time_point cur = std::chrono::steady_clock::now();
     const float dt = std::chrono::duration< float >( cur - prv ).count();
-    prv = cur;*/
+    prv = cur;
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
@@ -142,7 +142,10 @@ void SE_MAIN::display(){
 
     glDrawArrays(GL_POINTS, 0, pixelCounter);
 
-    //printf("FPS: %f\r\n", 1000/dt);
+    gfx.setCursor(0, 7);
+    char buffer[64];
+    sprintf(buffer, "FPS: %d", (int)(1000/dt*1000));
+    gfx.print(buffer);
 
     glfwSwapBuffers(window);
     glfwPollEvents();

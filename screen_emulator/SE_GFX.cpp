@@ -5,13 +5,16 @@
 
 /*****************************************************************************************/
 SE_GFX::SE_GFX(){
-
+    setCursorDefault();
+    textSize = 1;
 }
 
 /*****************************************************************************************/
 SE_GFX::SE_GFX(uint64_t width, uint64_t height){
     this->width = width;
     this->height = height;
+    setCursorDefault();
+    textSize = 1;
 }
 
 /*****************************************************************************************/
@@ -151,24 +154,24 @@ void SE_GFX::drawChar(uint32_t x, uint32_t y, Color bg, Color color, uint32_t si
 	if(c>=128 && c<=143) c = c+16;
 	if(c>=176 && c<=191) c = c-48;
 	if(c>191)  return;
-	for (uint8_t i=0; i<6; i++ ) {
-		uint8_t line;
+	for (int32_t i=0; i<6; i++) {
+		uint32_t line;
 		if (i == 5) {line = 0x00;}
 		else {
 			line = font[(c*5)+i];
-			for (uint8_t j = 0; j<8; j++)
+			for (int32_t j = 0; j<8; j++)
 			{
 				if (line & 0x01) {
 					if(size == 1){
-						drawPixel(x+i, y+j, color);
+						drawPixel(x+i, y-j, color);
 					}else{
-						fillRect(x+(i*size), y+(j*size), size, size, color);
+						fillRect(x+(i*size), y-(j*size), size, size, color);
 					}
-				}else if(true){
+				}else if(!isColorsSame(bg, color)){
 					if(size == 1){
-						drawPixel(x+i, y+j, bg);
+						drawPixel(x+i, y-j, bg);
 					}else{
-						fillRect(x+(i*size), y+(j*size), size, size, bg);
+						fillRect(x+(i*size), y-(j*size), size, size, bg);
 					}
 				}
 				line >>= 1;
@@ -179,10 +182,72 @@ void SE_GFX::drawChar(uint32_t x, uint32_t y, Color bg, Color color, uint32_t si
 
 /*****************************************************************************************/
 void SE_GFX::print(const char* str){
+    print(str, CL_WHITE(), CL_BLACK());
+}
 
+/*****************************************************************************************/
+void SE_GFX::print(const char* str, Color txColor){
+    print(str, txColor, CL_BLACK());
+}
+
+/*****************************************************************************************/
+void SE_GFX::print(const char* str, Color txColor, Color bgColor){
+    unsigned char type = *str;
+    if(type>=128) cursorX=cursorX-3;
+    while(*str){
+        drawChar(cursorX, cursorY, bgColor, txColor, 1, *str++);
+        unsigned char type = *str;
+        if (type>=128) {cursorX=cursorX+textSize*3;}
+        else {cursorX=cursorX+textSize*5;};
+    }
+}
+
+/*****************************************************************************************/
+void SE_GFX::printText(const char* str){
+    printText(str, CL_WHITE(), CL_BLACK());
+}
+
+/*****************************************************************************************/
+void SE_GFX::printText(const char* str, Color txColor){
+    printText(str, txColor, CL_BLACK());
+}
+
+/*****************************************************************************************/
+void SE_GFX::printText(const char* str, Color txColor, Color bgColor){
+    uint32_t charsTyped = 0;
+    unsigned char type = *str;
+    if(type>=128) cursorX=cursorX-3;
+    while(*str){
+        drawChar(cursorX, cursorY, bgColor, txColor, 1, *str++);
+        unsigned char type = *str;
+        if (type>=128) {cursorX=cursorX+textSize*3;}
+        else {cursorX=cursorX+textSize*5;};
+        if((float)charsTyped++ * 5.2f * textSize > width){
+            charsTyped = 0;
+            newString();
+        }
+    }
+    newString();
 }
 
 /*****************************************************************************************/
 void SE_GFX::println(const char* str){
+    println(str, CL_WHITE(), CL_BLACK());
+}
 
+/*****************************************************************************************/
+void SE_GFX::println(const char* str, Color txColor){
+    println(str, txColor, CL_BLACK());
+}
+
+/*****************************************************************************************/
+void SE_GFX::println(const char* str, Color txColor, Color bgColor){
+    print(str, txColor, bgColor);
+    newString();
+}
+
+void SE_GFX::newString(){
+    cursorX = 0;
+    if(cursorY > 16) cursorY = cursorY - 8;
+    else cursorY = height - 3;
 }
