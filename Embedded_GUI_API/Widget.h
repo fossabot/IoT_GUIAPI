@@ -1,6 +1,11 @@
-#pragma once
+#ifndef __WIDGET__
+#define __WIDGET__
 
 #include "Common.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif /*__cplusplus*/
 
 typedef enum EWidgetType_
 {
@@ -10,7 +15,7 @@ typedef enum EWidgetType_
 	EWIDGET_TYPE_LINEEDIT
 }EWidgetType;
 
-/*Îáúåêò Widget*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Widget*/
 typedef struct CGUIWidget_ CGUIWidget;
 
 /*************************************************************************/
@@ -18,3 +23,9 @@ void/*EGUIResult*/ Widget_create(CGUIWidget** ppWidget, const SGUI_Callbacks* ps
 void/*EGUIResult*/ Widget_destroy(CGUIWidget* pWidget);
 
 void/*EGUIResult*/ Widget_draw(CGUIWidget* pWidget);
+
+#ifdef __cplusplus
+} /*extern "C"*/
+#endif /*__cplusplus*/
+
+#endif

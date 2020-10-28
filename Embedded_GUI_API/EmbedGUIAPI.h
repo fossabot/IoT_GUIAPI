@@ -1,11 +1,12 @@
-#pragma once
-
-//#ifdef __cplusplus
-extern "C" {
-//#endif /*__cplusplus*/
+#ifndef __EMBEDEDGUIAPI__
+#define __EMBEDEDGUIAPI__
 
 #include "Layout.h"
 #include "Widget.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif /*__cplusplus*/
 
 /*������ GUI*/
 typedef struct CGUI_ CGUI;
@@ -30,6 +31,8 @@ EGUIResult GUI_displayLayout(CGUI* pGUI, CGUILayout* pLayout);
 EGUIResult GUI_setCursor(CGUI* pGUI, CGUILayout* pLayout, CGUIWidget* pWidget);
 
 
-//#ifdef __cplusplus
+#ifdef __cplusplus
 } /*extern "C"*/
-//#endif /*__cplusplus*/
+#endif /*__cplusplus*/
+
+#endif
