@@ -51,9 +51,8 @@ GUIAPI_ScreenEmulator::~GUIAPI_ScreenEmulator(){
 void GUIAPI_ScreenEmulator::setScreenSize(uint32_t width, uint32_t height){
     this->width = width;
     this->height = height;
-    vertices = (float*)calloc(width*height, sizeof(float));
+    vertices = (float*)calloc(6*width*height, sizeof(float));
     pixelCounter = 0;
-    //glViewport(0, 0, width, height);
 }
 
 /*****************************************************************************************/
@@ -81,7 +80,7 @@ bool GUIAPI_ScreenEmulator::init(std::string shaderFolderPath){
 	}
 
     glfwMakeContextCurrent(window);
-    //glfwSwapInterval(1);
+    glfwSwapInterval(1);
 
     glfwSetFramebufferSizeCallback(window, window_size_callback);
     glfwSetKeyCallback(window, key_callback);
@@ -97,6 +96,9 @@ bool GUIAPI_ScreenEmulator::init(std::string shaderFolderPath){
 
     //Init vertex array
     initVertexes();
+
+    glEnable(GL_DOUBLEBUFFER);
+    glDisable(GL_DEPTH_TEST);
 
     #ifdef GL_SHADING_LANGUAGE_VERSION
         printf("Supported GLSL version is %s.\n", (char *)glGetString(GL_SHADING_LANGUAGE_VERSION));
@@ -135,6 +137,8 @@ void GUIAPI_ScreenEmulator::display(){
     std::chrono::steady_clock::time_point cur = std::chrono::steady_clock::now();
     const float dt = std::chrono::duration< float >( cur - prv ).count();
     prv = cur;*/
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     glUseProgram(shaderLoader.getProgram());
     glBindVertexArray(VAO);
@@ -149,14 +153,11 @@ void GUIAPI_ScreenEmulator::display(){
 
 /*****************************************************************************************/
 void GUIAPI_ScreenEmulator::clear(){
-    Pixel pixel;
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
     free(vertices);
-    vertices = (float*)calloc(width*height, sizeof(float));
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * width*height, 0, GL_DYNAMIC_DRAW);
+    vertices = (float*)calloc(6*width*height, sizeof(float));
+    //glDeleteBuffers();
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * width*height, 0, GL_DYNAMIC_DRAW);
     pixelCounter = 0;
 }
 
@@ -202,6 +203,7 @@ void GUIAPI_ScreenEmulator::setPixel(Pixel pixel){
         vertices[i + pixelCounter * 6] = data.floats[i];
     }
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*width*height, vertices);
+    //glBufferSubData(GL_ARRAY_BUFFER, 0, 18, data.floats);
 }
 
 /*****************************************************************************************/
