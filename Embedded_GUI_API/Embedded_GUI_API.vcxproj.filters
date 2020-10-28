@@ -24,6 +24,12 @@
     <Filter Include="Source Files\EmbedGUIAPI\Common\List">
       <UniqueIdentifier>{68336529-9da4-4be8-954c-88522dc11de2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\glad">
+      <UniqueIdentifier>{6db5ee58-befd-4827-a048-b5e80a92528e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ScreenEmulator">
+      <UniqueIdentifier>{f5df4962-2ff0-41e8-8b9d-5cb1d888fbee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Embedded_GUI_API.cpp">
@@ -41,6 +47,18 @@
     <ClCompile Include="WidgetsList.c">
       <Filter>Source Files\EmbedGUIAPI\Common\List</Filter>
     </ClCompile>
+    <ClCompile Include="src\glad.c">
+      <Filter>Source Files\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\screen_emulator\GUIAPI_ScreenEmulator.cpp">
+      <Filter>Source Files\ScreenEmulator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\screen_emulator\SE_GFX.cpp">
+      <Filter>Source Files\ScreenEmulator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\screen_emulator\ShaderLoader.cpp">
+      <Filter>Source Files\ScreenEmulator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EmbedGUIAPI.h">
@@ -57,6 +75,9 @@
     </ClInclude>
     <ClInclude Include="WidgetsList.h">
       <Filter>Source Files\EmbedGUIAPI\Common\List</Filter>
+    </ClInclude>
+    <ClInclude Include="..\screen_emulator\GUIAPI_ScreenEmulator.h">
+      <Filter>Source Files\ScreenEmulator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

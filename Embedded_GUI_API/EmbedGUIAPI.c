@@ -11,10 +11,10 @@ struct CGUI_
 {
 	void* pUData;  
 
-	//тут тоже нужно список из лэйаутов хранить, а не текущий лэйаут
+	//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	CGUILayout* pLayout;
 
-	//коллбэки для доступа к драйверу дисплея
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	SGUI_Callbacks* pstCallbacks;
 
 };
@@ -24,21 +24,21 @@ EGUIResult GUI_create(CGUI** ppGUI, const SGUI_Callbacks *pstCallbacks, void* pU
 {
 	CGUI* pGUI = 0;
 
-	//создаем объект 
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 
 	(*ppGUI) = (CGUI*)calloc(1, sizeof(CGUI));
 	pGUI = (*ppGUI);
 
-	//проверяем, что объект создан
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	if (!pGUI)
 		return GUI_RESULT_OUT_OF_MEMORY;
 
-	//заполняем пользовательские данные
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	pGUI->pUData = pUData;
 
-	//Коллбэки
-	pGUI->pstCallbacks = pstCallbacks;
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//pGUI->pstCallbacks = pstCallbacks;
 
-	//лэйаут пока не назначили
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	pGUI->pLayout = 0;
 
 	return GUI_RESULT_SUCCESSFUL;
@@ -66,12 +66,12 @@ EGUIResult GUI_displayLayout(CGUI* pGUI, CGUILayout* pLayout)
 /************************************************************************/
 EGUIResult GUI_setCursor(CGUI* pGUI, CGUILayout* pLayout, CGUIWidget* pWidget)
 {
-	//ищем позицию виджета в лэйауте
+	//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	int x_pos;
 	int y_pos;
 	Layout_findWidget(pLayout, pWidget, &x_pos, &y_pos);
 
-	//рисуем курсор из этой позиции
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	drawCursor_(pGUI, x_pos, y_pos);
 }
 
@@ -80,7 +80,7 @@ EGUIResult GUI_createLayout(CGUI* pGUI, CGUILayout** ppLayout)
 {
 	Layout_create(ppLayout, 0);
 
-	//добавляем его как текущий (потом тут будет добавление в список лэйаутов)
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 	pGUI->pLayout = *ppLayout;
 
 	return GUI_RESULT_SUCCESSFUL;
@@ -106,5 +106,5 @@ EGUIResult GUI_addWidgetToLayout(CGUI* pGUI, CGUILayout* pLayout, CGUIWidget* pW
 /************************************************************************/
 void drawCursor_(CGUI* pGUI, int x_pos, int y_pos)
 {
-	//дергаем pGUI->pstCallbacks->fnDrawPixel, чтобы нарисовать попиксельно курсор
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ pGUI->pstCallbacks->fnDrawPixel, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 }

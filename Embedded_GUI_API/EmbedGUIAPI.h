@@ -1,13 +1,13 @@
 #pragma once
 
-#ifdef __cplusplus
+//#ifdef __cplusplus
 extern "C" {
-#endif /*__cplusplus*/
+//#endif /*__cplusplus*/
 
 #include "Layout.h"
 #include "Widget.h"
 
-/*Объект GUI*/
+/*пїЅпїЅпїЅпїЅпїЅпїЅ GUI*/
 typedef struct CGUI_ CGUI;
 
 
@@ -15,21 +15,21 @@ typedef struct CGUI_ CGUI;
 EGUIResult GUI_create(CGUI** ppGUI, const SGUI_Callbacks* pstCallbacks, void* pUData);
 EGUIResult GUI_destroy(CGUI* ppGUI);
 
-//создаем Layout
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Layout
 EGUIResult GUI_createLayout(CGUI* pGUI, CGUILayout** ppLayout);
-//создаем Виджет
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 EGUIResult GUI_createWidget(CGUI* pGUI, CGUIWidget** ppWidget);
 
-//добавить виджет в Layout
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ Layout
 EGUIResult GUI_addWidgetToLayout(CGUI* pGUI, CGUILayout* pLayout, CGUIWidget* pWidget, int x_pos, int y_pos);
 
-//нарисовать лэйаут
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 EGUIResult GUI_displayLayout(CGUI* pGUI, CGUILayout* pLayout);
 
-//установить курсор
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 EGUIResult GUI_setCursor(CGUI* pGUI, CGUILayout* pLayout, CGUIWidget* pWidget);
 
 
-#ifdef __cplusplus
+//#ifdef __cplusplus
 } /*extern "C"*/
-#endif /*__cplusplus*/
+//#endif /*__cplusplus*/
