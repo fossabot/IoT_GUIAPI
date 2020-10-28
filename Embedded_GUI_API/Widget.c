@@ -6,10 +6,10 @@ struct CGUIWidget_
 {
 	void* pUData;
 	
-	//коллбэки для доступу к драйверу дисплея
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	SGUI_Callbacks* pstCallbacks;
 
-	//Параметры виджета
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	EWidgetType eType;
 	int			height;
 	int			width;
@@ -21,16 +21,16 @@ void Widget_create(CGUIWidget** ppWidget, const SGUI_Callbacks* pstCallbacks, vo
 {
 	CGUIWidget* pWidget;
 
-	//создаем виджет
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	(*ppWidget) = (CGUIWidget*)calloc(1, sizeof(CGUIWidget));
 	pWidget = (*ppWidget);
 
-	//проверяем, что объект создан
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	if (!pWidget)
 		return /*GUI_RESULT_OUT_OF_MEMORY*/;
 
 	pWidget->pUData       = pUData;
-	pWidget->pstCallbacks = pstCallbacks;
+	//pWidget->pstCallbacks = pstCallbacks;
 
 	//return GUI_RESULT_SUCCESSFUL;
 }
@@ -47,8 +47,8 @@ void Widget_draw(CGUIWidget* pWidget)
 {
 	switch (pWidget->eType)
 	{
-		//рисуем попиксельно виджет нужного типа в прямоугольнике height*width, 
-		//дергаем драйвер дисплея через pWidget->pstCallbacks->fnDrawPixel();
+		//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ height*width, 
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ pWidget->pstCallbacks->fnDrawPixel();
 
 	case EWIDGET_TYPE_BUTTON:
 		break;

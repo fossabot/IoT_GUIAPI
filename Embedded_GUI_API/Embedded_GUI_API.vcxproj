@@ -78,9 +78,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>T:\PROGRAMMFILES\OpenGL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>T:\PROGRAMMFILES\OpenGL\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>T:\PROGRAMMFILES\OpenGL\include\GLFW;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -116,10 +119,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>T:\WORKSPACES\IoT_GUIAPI\Embedded_GUI_API\include\KHR;T:\WORKSPACES\IoT_GUIAPI\Embedded_GUI_API\include\glad;T:\WORKSPACES\IoT_GUIAPI\Embedded_GUI_API\include;T:\WORKSPACES\IoT_GUIAPI\Embedded_GUI_API\src;T:\PROGRAMMFILES\OpenGL\include\GLFW;T:\PROGRAMMFILES\OpenGL\lib;T:\WORKSPACES\IoT_GUIAPI\screen_emulator;T:\WORKSPACES\IoT_GUIAPI\screen_emulator\shaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,6 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>T:\WORKSPACES\IoT_GUIAPI\Embedded_GUI_API\include;T:\WORKSPACES\IoT_GUIAPI\Embedded_GUI_API\include\glad;T:\WORKSPACES\IoT_GUIAPI\Embedded_GUI_API\include\KHR;T:\WORKSPACES\IoT_GUIAPI\Embedded_GUI_API\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,13 +145,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\screen_emulator\GUIAPI_ScreenEmulator.cpp" />
+    <ClCompile Include="..\screen_emulator\SE_GFX.cpp" />
+    <ClCompile Include="..\screen_emulator\ShaderLoader.cpp" />
     <ClCompile Include="Embedded_GUI_API.cpp" />
     <ClCompile Include="EmbedGUIAPI.c" />
     <ClCompile Include="Layout.c" />
+    <ClCompile Include="src\glad.c" />
     <ClCompile Include="Widget.c" />
     <ClCompile Include="WidgetsList.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\screen_emulator\GUIAPI_ScreenEmulator.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="EmbedGUIAPI.h" />
     <ClInclude Include="Layout.h" />

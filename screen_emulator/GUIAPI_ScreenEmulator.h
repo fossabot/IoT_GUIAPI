@@ -9,6 +9,7 @@
 //#include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
+
 typedef struct{
     float r, g, b;
 } Color;
