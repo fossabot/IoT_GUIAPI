@@ -63,6 +63,14 @@ std::vector<std::string> ShaderLoader::getFilenames(){
                 }
             }
             closedir(dirp);
+            if(foundedFiles.size() > 0) {
+                std::cout << "Founded " << foundedFiles.size() << " shaders in folder " << shaderPaths[i] << std::endl;
+                pathPrefix = shaderPaths[i];
+                break;
+            }else{
+                std::cout << "Can't found shaders in " << shaderPaths[i] << " folder." << std::endl;
+                continue;
+            }
         #endif
     }
     return foundedFiles;

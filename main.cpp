@@ -5,7 +5,7 @@
 #include "GUIAPI_String.h"
 #include "GUIAPI_Vector.h"
 
-#include "GUIAPI_ScreenEmulator.h"
+#include "SE_MAIN.h"
 
 #include <random>
 #include <unistd.h>
@@ -204,97 +204,97 @@ private:
 uint32_t width = 240;
 uint32_t height = 320;
 
-void drawPixelsTest(GUIAPI_ScreenEmulator *emu){
+void drawPixelsTest(SE_MAIN *emu){
     emu->clear();
 
     for(uint32_t i = 0; i < 100; i++){
-        emu->drawPixel(rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+        emu->gfx.drawPixel(rand()%240, rand()%320, getRandomColor());
         emu->display();
     }
 }
 
-void drawLinesTest(GUIAPI_ScreenEmulator *emu){
+void drawLinesTest(SE_MAIN *emu){
     emu->clear();
     for (int16_t x=0; x < width; x+=6){
-        emu->drawLine(0, 0, x, height-1, GUIAPI_ScreenEmulator::getRandomColor());
+        emu->gfx.drawLine(0, 0, x, height-1, getRandomColor());
         emu->display();
     }
         
     for (int16_t y=0; y < height; y+=6){
-        emu->drawLine(0, 0, width-1, y, GUIAPI_ScreenEmulator::CL_RED());
+        emu->gfx.drawLine(0, 0, width-1, y, CL_RED());
         emu->display();
     }
 
     emu->clear();
     for (int16_t x=0; x < width; x+=6){
-        emu->drawLine(width-1, 0, x, height-1, GUIAPI_ScreenEmulator::CL_GREEN());
+        emu->gfx.drawLine(width-1, 0, x, height-1, CL_GREEN());
         emu->display();
     }
 
     for (int16_t y=0; y < height; y+=6){
-        emu->drawLine(width-1, 0, 0, y, GUIAPI_ScreenEmulator::CL_BLUE());
+        emu->gfx.drawLine(width-1, 0, 0, y, CL_BLUE());
         emu->display();
     }
 
     emu->clear();
     for (int16_t x=0; x < width; x+=6){
-        emu->drawLine(0, height-1, x, 0, GUIAPI_ScreenEmulator::CL_PINK());
+        emu->gfx.drawLine(0, height-1, x, 0, CL_PINK());
         emu->display();
     }
 
     for (int16_t y=0; y < height; y+=6){
-        emu->drawLine(0, height-1, width-1, y, GUIAPI_ScreenEmulator::CL_MAGENTA());
+        emu->gfx.drawLine(0, height-1, width-1, y, CL_MAGENTA());
         emu->display();
     }
 
     emu->clear();
     for (int16_t x=0; x < width; x+=6){
-        emu->drawLine(width-1, height-1, x, 0, GUIAPI_ScreenEmulator::CL_YELLOW());
+        emu->gfx.drawLine(width-1, height-1, x, 0, CL_YELLOW());
         emu->display();
     }
 
     for (int16_t y=0; y < height; y+=6){
-        emu->drawLine(width-1, height-1, 0, y, GUIAPI_ScreenEmulator::CL_GREY());
+        emu->gfx.drawLine(width-1, height-1, 0, y, CL_GREY());
         emu->display();
     }
 }
 
-void drawFastLinesTest(GUIAPI_ScreenEmulator *emu){
+void drawFastLinesTest(SE_MAIN *emu){
     emu->clear();
     for (int16_t y=0; y < height; y+=5) {
-        emu->drawFastHLine(0, y, width, GUIAPI_ScreenEmulator::CL_MAGENTA());
+        emu->gfx.drawFastHLine(0, y, width, CL_MAGENTA());
         emu->display();
     }
     for (int16_t x=0; x < width; x+=5) {
-        emu->drawFastVLine(x, 0, height, GUIAPI_ScreenEmulator::CL_YELLOW());
+        emu->gfx.drawFastVLine(x, 0, height, CL_YELLOW());
         emu->display();
     }
 }
 
-void drawRectTest(GUIAPI_ScreenEmulator *emu){
+void drawRectTest(SE_MAIN *emu){
     emu->clear();
     for (int16_t x=0; x < width; x+=6) {
-        emu->drawRect(width/2 -x/2, height/2 -x/2 , x, x, GUIAPI_ScreenEmulator::getRandomColor());
+        emu->gfx.drawRect(width/2 -x/2, height/2 -x/2 , x, x, getRandomColor());
         emu->display();
   }
 }
 
-void drawFillRectTest(GUIAPI_ScreenEmulator *emu){
+void drawFillRectTest(SE_MAIN *emu){
     emu->clear();
     for (int16_t x=0; x < width; x+=6) {
         emu->clear();
-        emu->fillRect(width/2 -x/2, height/2 -x/2 , x, x, GUIAPI_ScreenEmulator::getRandomColor());
+        emu->gfx.fillRect(width/2 -x/2, height/2 -x/2 , x, x, getRandomColor());
         emu->display();
   }
 }
 
-void drawTriangleTest(GUIAPI_ScreenEmulator *emu){
+void drawTriangleTest(SE_MAIN *emu){
     emu->clear();
     int x = height-1;
     int y = 0;
     int z = width;
     for(uint32_t t = 0 ; t <= 15; t++) {
-        emu->drawTriangle(width/2, y, y, x, z, x, GUIAPI_ScreenEmulator::getRandomColor());
+        emu->gfx.drawTriangle(width/2, y, y, x, z, x, getRandomColor());
         x-=4;
         y+=4;
         z-=4;
@@ -302,32 +302,31 @@ void drawTriangleTest(GUIAPI_ScreenEmulator *emu){
     }
 }
 
-void drawCirclesTest(GUIAPI_ScreenEmulator *emu){
+void drawCirclesTest(SE_MAIN *emu){
     emu->clear();
     uint32_t radius = 10;
     for (int16_t x=0; x < width+radius; x+=radius*2) {
         for (int16_t y=0; y < height+radius; y+=radius*2) {
-            emu->drawCircle(x, y, radius, GUIAPI_ScreenEmulator::getRandomColor());
+            emu->gfx.drawCircle(x, y, radius, getRandomColor());
         }
     }
     emu->display();
 }
 
-void drawFillCirclesTest(GUIAPI_ScreenEmulator *emu){
+void drawFillCirclesTest(SE_MAIN *emu){
     emu->clear();
     uint32_t radius = 10;
     for (int16_t x=0; x < width+radius; x+=radius*2) {
         for (int16_t y=0; y < height+radius; y+=radius*2) {
             emu->clear();
-            emu->fillCircle(x, y, radius, GUIAPI_ScreenEmulator::getRandomColor());
+            emu->gfx.fillCircle(x, y, radius, getRandomColor());
             emu->display();
         }
     }
 }
 
 int main(int argc, char* argv[]){
-
-    GUIAPI_ScreenEmulator emu(width, height);
+    SE_MAIN emu(width, height);
     if(emu.init("..\\screen_emulator\\shaders\\")){
         while(emu.getWindowWorker()){
             emu.clear();
