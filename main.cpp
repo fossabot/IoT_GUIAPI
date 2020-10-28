@@ -207,7 +207,7 @@ void drawPixelsTest(GUIAPI_ScreenEmulator *emu){
     emu->clear();
 
     for(uint32_t i = 0; i < 100; i++){
-        //emu->drawPixel(rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
+        emu->drawPixel(rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
         emu->display();
     }
 }
@@ -264,18 +264,10 @@ int main(int argc, char* argv[]){
     if(emu.init("..\\screen_emulator\\shaders\\")){
         while(emu.getWindowWorker()){
             emu.clear();
-            //emu.drawPixel(0.5f, -0.5f, GUIAPI_ScreenEmulator::CL_RED());
-            //emu.drawPixel(-0.5f, -0.5f, GUIAPI_ScreenEmulator::CL_GREEN());
-            //emu.drawPixel(0.0f, 0.5f, GUIAPI_ScreenEmulator::CL_BLUE());
-            emu.drawPixel((uint32_t)120, (uint32_t)320, GUIAPI_ScreenEmulator::CL_RED());
-            emu.drawPixel((uint32_t)0, (uint32_t)0, GUIAPI_ScreenEmulator::CL_GREEN());
-            emu.drawPixel((uint32_t)240, (uint32_t)0, GUIAPI_ScreenEmulator::CL_BLUE());
-            //FINALLY DYNAMIC BUFFER WORKING
-            //TODO: TRANSLATE X, Y COORDS TO FLOAT
-            /*drawPixelsTest(&emu);
+            drawPixelsTest(&emu);
             _sleep(1000);
             drawLinesTest(&emu);
-            _sleep(1000);*/
+            _sleep(1000);
             /*emu.drawLine(rand()%240, rand()%320, rand()%240, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());
             emu.drawFastHLine(rand()%240, rand()%320, rand()%240, GUIAPI_ScreenEmulator::getRandomColor());
             emu.drawFastVLine(rand()%240, rand()%320, rand()%320, GUIAPI_ScreenEmulator::getRandomColor());

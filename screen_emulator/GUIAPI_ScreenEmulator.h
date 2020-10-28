@@ -30,6 +30,7 @@ public:
 
     void setScreenSize(uint32_t width, uint32_t height);
 
+    bool init();
     bool init(std::string shaderFolderPath);
 
     void initVertexes();
@@ -42,7 +43,6 @@ public:
 
 /********************************Public GFX Methods**************************************/
 public:
-    void drawPixel(float x, float y, Color color);
     void drawPixel(uint32_t x, uint32_t y, Color color);
     void drawLine(uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, Color color);
     void drawFastVLine(uint32_t x, uint32_t y, uint32_t h, Color color);
@@ -97,9 +97,8 @@ private:
     float *vertices;
 
 private:
+    void createPixel(float x, float y, Color color);
     void setPixel(Pixel pixel);
-    void setColor(Color color);
-    void setPosition(Position position);
 
     void swap(uint32_t &a, uint32_t &b) { 
         uint32_t t = a; 

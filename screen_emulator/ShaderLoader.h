@@ -12,7 +12,11 @@ public:
     ShaderLoader(std::string  shaderFolder);
     ~ShaderLoader();
 
-    void loadShaders(std::string  shaderFolder);
+    void addShaderPath(std::string newPath) { shaderPaths.push_back(newPath); }
+
+    std::vector<std::string> getFilenames();
+
+    void loadShaders();
     GLuint getProgram() { return programm_ID; }
 
     void setBool(const std::string &name, bool value) const{         
@@ -28,6 +32,8 @@ public:
     } 
 private:
     std::vector<GLuint> compiledShaders;
+    std::vector<std::string> shaderPaths;
+    std::string pathPrefix;
     GLuint programm_ID;
 };
 

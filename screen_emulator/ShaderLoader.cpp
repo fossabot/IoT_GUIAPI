@@ -11,50 +11,68 @@
 #endif
 
 ShaderLoader::ShaderLoader(){
-
+    addShaderPath("shaders\\");     //default path
 }
 
 ShaderLoader::ShaderLoader(std::string shaderFolder){
-    loadShaders(shaderFolder);
+    addShaderPath("shaders\\");
+    addShaderPath(shaderFolder);
+    loadShaders();
 }
 
 ShaderLoader::~ShaderLoader(){
 
 }
 
-void ShaderLoader::loadShaders(std::string  shaderFolder){
-    std::string readedShaderCode;
-    std::ifstream shaderFile;
-
-    std::cout << "Looking for shaders in " << shaderFolder << " folder" << std::endl;
+std::vector<std::string> ShaderLoader::getFilenames(){
     std::vector<std::string> foundedFiles;
-    #ifdef _WIN32
-        std::string pattern(shaderFolder);
-        pattern.append("\\*");
-        WIN32_FIND_DATA data;
-        HANDLE hFind;
-        if ((hFind = FindFirstFile(pattern.c_str(), &data)) != INVALID_HANDLE_VALUE) {
-            do {
+
+    for(uint32_t i = 0; i < shaderPaths.size(); i++){
+        std::cout << "Looking for shaders in " << shaderPaths[i] << " folder" << std::endl;
+        #ifdef _WIN32
+            std::string pattern(shaderPaths[i]);
+            pattern.append("\\*");
+            WIN32_FIND_DATA data;
+            HANDLE hFind;
+            if ((hFind = FindFirstFile(pattern.c_str(), &data)) != INVALID_HANDLE_VALUE) {
+                do {
+                    std::string temp = data.cFileName;
+                    if(temp.find(".glsl") != std::string::npos || temp.find(".vs") != std::string::npos || temp.find(".fs") != std::string::npos) {
+                        foundedFiles.push_back(temp);
+                        std::cout << "Founded file " << foundedFiles.back() << std::endl;
+                    }
+                } while (FindNextFile(hFind, &data) != 0);
+                FindClose(hFind);
+                if(foundedFiles.size() > 0) {
+                    std::cout << "Founded " << foundedFiles.size() << " shaders in folder " << shaderPaths[i] << std::endl;
+                    pathPrefix = shaderPaths[i];
+                    break;
+                }else{
+                    std::cout << "Can't found shaders in " << shaderPaths[i] << " folder." << std::endl;
+                    continue;
+                }
+            }
+        #else
+            DIR* dirp = opendir(shaderFolder.c_str());
+            struct dirent * dp;
+            while ((dp = readdir(dirp)) != NULL) {
                 std::string temp = data.cFileName;
-                if(temp.find(".glsl") != std::string::npos || temp.find(".vs") != std::string::npos || temp.find(".fs") != std::string::npos) {
+                if(temp.find(".glsl") != std::string::npos) {
                     foundedFiles.push_back(temp);
                     std::cout << "Founded file " << foundedFiles.back() << std::endl;
                 }
-            } while (FindNextFile(hFind, &data) != 0);
-            FindClose(hFind);
-        }
-    #else
-        DIR* dirp = opendir(shaderFolder.c_str());
-        struct dirent * dp;
-        while ((dp = readdir(dirp)) != NULL) {
-            std::string temp = data.cFileName;
-            if(temp.find(".glsl") != std::string::npos) {
-                foundedFiles.push_back(temp);
-                std::cout << "Founded file " << foundedFiles.back() << std::endl;
             }
-        }
-        closedir(dirp);
-    #endif
+            closedir(dirp);
+        #endif
+    }
+    return foundedFiles;
+}
+
+void ShaderLoader::loadShaders(){
+    std::string readedShaderCode;
+    std::ifstream shaderFile;
+
+    std::vector<std::string> foundedFiles = getFilenames();
 
     int success;
     char infoLog[512];
@@ -67,7 +85,7 @@ void ShaderLoader::loadShaders(std::string  shaderFolder){
         shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         try {
             // open files
-            shaderFile.open(shaderFolder+foundedFiles[i]);
+            shaderFile.open(pathPrefix+foundedFiles[i]);
             std::stringstream shaderStream;
             // read file's buffer contents into streams
             shaderStream << shaderFile.rdbuf();	
@@ -90,7 +108,7 @@ void ShaderLoader::loadShaders(std::string  shaderFolder){
             std::cout << "Compiling fragment shader..." << std::endl;
             okFlag = true;
         }else{
-            std::cout << "Error. Unknown shader " << shaderFolder+foundedFiles[i] << std::endl;
+            std::cout << "Error. Unknown shader " << pathPrefix+foundedFiles[i] << std::endl;
         }
 
         if(okFlag){
@@ -109,20 +127,6 @@ void ShaderLoader::loadShaders(std::string  shaderFolder){
 
     std::cout << "Shaders compiled: " << compiledShaders.size() << std::endl;
     glLinkProgram(programm_ID);
-
-    /*if(compiledShaders.size() == 0){
-        std::cout << "Error. No shaders found for create program." << std::endl;
-        return;
-    }
-
-    
-
-    
-    programm_ID = glCreateProgram();
-    for(uint32_t i = 0; i < compiledShaders.size(); i++)
-        glAttachShader(programm_ID, compiledShaders[i]);
-    std::cout << "Linking program..." << std::endl;
-    glLinkProgram(programm_ID);*/
 
     glGetProgramiv(programm_ID, GL_LINK_STATUS, &success);
     if(!success){
