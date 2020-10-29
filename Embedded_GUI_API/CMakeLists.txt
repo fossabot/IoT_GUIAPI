@@ -3,8 +3,8 @@ project(Embeeded_GUI_API CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../screen_emulator/)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../screen_emulator/ ${CMAKE_CURRENT_BINARY_DIR}/screen_emulator/)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../IoT_Screen_Emulator/)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../IoT_Screen_Emulator/ ${CMAKE_CURRENT_BINARY_DIR}/IoT_Screen_Emulator/)
 
 #enable_testing()
 #add_subdirectory(Testing/)

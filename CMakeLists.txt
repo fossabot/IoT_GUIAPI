@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)#версия с-make
+cmake_minimum_required(VERSION 3.2)
 project(IoT_GUIAPI CXX)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 11)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/datatypes/)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/datatypes/)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/screen_emulator/)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/screen_emulator/)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/IoT_Screen_Emulator/)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/IoT_Screen_Emulator/)
 
 enable_testing()
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Testing/)
