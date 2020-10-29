@@ -9,11 +9,9 @@ addons:
     packages:
       - g++-5
       - cmake
-      - libglfw3
+      - build-essential
       - libglfw3-dev
-      - libglew
       - libglew-dev
-      - freeglut3
       - freeglut3-dev
       - libegl1-mesa-dev
 
@@ -21,3 +19,6 @@ script:
   - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake .
   - cmake --build . -- -j2
   - ctest -j2
+
+  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake Embedded_GUI_API/
+  - cmake --build Embedded_GUI_API/ -- -j2
