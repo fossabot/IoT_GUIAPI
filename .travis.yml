@@ -20,5 +20,5 @@ script:
   - cmake --build . -- -j2
   - ctest -j2
 
-  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake Embedded_GUI_API/
-  - cmake --build Embedded_GUI_API/ -- -j2
+  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake ./Embedded_GUI_API/
+  - cmake --build ./Embedded_GUI_API/ -- -j2
